@@ -1,0 +1,150 @@
+body {
+	height: 100%;
+	background-color: white;	
+	background-size: 100% 100%;
+  	padding-top: 40px;
+}
+
+#header {
+	background-color: rgb(140, 240, 120);
+	height: 50px;
+}
+
+#dropdown-categories {
+	width: 400px;
+	margin-left: 8px; 
+	margin-top: 8px;
+  	margin-right: auto;
+	padding: 5px;
+}
+
+.navbar {
+	width: 100%;
+	margin: 5px auto 5px auto;
+}
+
+.divider-vertical {
+	height: 50px;
+	margin: 0 9px;
+	border-left: 1px solid #333;
+	border-right: 1px solid #FFF; 
+}
+
+.navbar-inverse {
+	background-color: #F5F5F5;
+}
+.nav-pills {
+	height: 2px;
+}
+
+#menu-categories {
+	width: 270px; 
+}
+
+#dropdown-caret {
+	margin-left: 100px;	
+}
+
+#search-form {
+	width: 350px;
+	margin-left: auto; 
+  	margin-right: 8px;
+	padding: 5px;
+}
+
+#content {
+	background: #fff;
+	padding-bottom: 0px;
+	margin-top: 0px;
+}
+ 
+#sidesar-menu {
+	style="display: block; 
+	position: static;
+}
+
+.sidebar {
+	margin: 0;
+	padding: 5px;
+}
+
+.table thead tr {
+	background: #333;
+	color: #fff;
+}
+
+#footer {
+	background: #333;
+	color: #fff;
+	height: 50px;
+	margin-top: 8px;
+}
+
+.dropdown clearfix {
+	position: relative;
+}
+
+.dropdown-submenu{
+    position:relative;
+}
+ 
+.dropdown-submenu > .dropdown-menu
+{
+    top:0;
+    left:100%;
+    margin-top:-6px;
+    margin-left:-1px;
+    -webkit-border-radius:0 6px 6px 6px;
+    -moz-border-radius:0 6px 6px 6px;
+    border-radius:0 6px 6px 6px;
+}
+ 
+.dropdown-submenu:hover > .dropdown-menu{
+    display:block;
+}
+ 
+.dropdown-submenu > a:after{
+    display:block;
+    content:" ";
+    float:right;
+    width:0;
+    height:0;
+    border-color:transparent;
+    border-style:solid;
+    border-width:5px 0 5px 5px;
+    border-left-color:#cccccc;
+    margin-top:5px;
+    margin-right:-10px;
+}
+ 
+.dropdown-submenu:hover > a:after{
+    border-left-color:#ffffff;
+}
+ 
+.dropdown-submenu .pull-left{
+    float:none;
+}
+ 
+.dropdown-submenu.pull-left > .dropdown-menu{
+    left:-100%;
+    margin-left:10px;
+    -webkit-border-radius:6px 0 6px 6px;
+    -moz-border-radius:6px 0 6px 6px;
+    border-radius:6px 0 6px 6px;
+}
+
+#addressModal {
+	width: 300px;
+	height: 200px;
+}
+
+.form-horizontal {
+	background-color: #fff;
+	margin: 20px 0;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#loginForm {
+	width: 100px;
+}
