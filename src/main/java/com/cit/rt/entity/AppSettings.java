@@ -11,7 +11,7 @@ public class AppSettings {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "settlement_id")
+    @JoinColumn(name = "settlement_id", nullable = false)
     private Settlement settlement;
 
     @Column(name = "last_name", nullable = false)

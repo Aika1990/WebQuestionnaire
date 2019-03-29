@@ -10,7 +10,7 @@ public class QuestionnaireNum {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "app_settings_id")
+    @JoinColumn(name = "app_settings_id", nullable = false)
     private AppSettings appSettings;
 
     public QuestionnaireNum() {

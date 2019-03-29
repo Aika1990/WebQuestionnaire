@@ -1,6 +1,5 @@
 package com.cit.rt.service;
 
-import com.cit.rt.entity.District;
 import com.cit.rt.entity.Settlement;
 import com.cit.rt.exception.ResourceNotFoundException;
 import com.cit.rt.repository.SettlementRepository;
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

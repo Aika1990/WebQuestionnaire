@@ -3,7 +3,11 @@ package com.cit.rt.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "settlement")
+@Table(name = "settlement", indexes = {@Index(
+        name = "idx_settlement_district_id_name",
+        columnList = "district_id, name",
+        unique = true)})
+
 public class Settlement {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -11,8 +15,8 @@ public class Settlement {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "district_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "district_id", nullable = false)
     private District district;
 
     public Settlement() {
@@ -47,12 +51,12 @@ public class Settlement {
         this.district = district;
     }
 
-    @Override
-    public String toString() {
-        return "Settlement{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", district=" + district.getName() +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Settlement{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", district=" + district +
+//                '}';
+//    }
 }

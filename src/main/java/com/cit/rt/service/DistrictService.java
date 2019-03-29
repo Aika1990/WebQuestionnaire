@@ -7,8 +7,9 @@ import java.util.List;
 
 public interface DistrictService {
 
-    public List<District> getAllDistricts();
-    public void saveDistrict(District district);
-    public District getDistrictById(Integer id) throws ResourceNotFoundException;
-    public void deleteDistrictById(Integer id) throws ResourceNotFoundException;
+    List<District> getAllDistricts();
+    void saveDistrict(District district);
+    District getDistrictById(Integer id) throws ResourceNotFoundException;
+    void deleteDistrictById(Integer id) throws ResourceNotFoundException;
+    District findByNameDistrict(String name);
 }

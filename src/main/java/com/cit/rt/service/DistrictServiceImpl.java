@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
 @Service
 public class DistrictServiceImpl implements DistrictService{
 
@@ -39,5 +38,11 @@ public class DistrictServiceImpl implements DistrictService{
     @Transactional
     public void deleteDistrictById(Integer id) {
         districtRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public District findByNameDistrict(String name) {
+        return districtRepository.findByNameDistrict(name);
     }
 }

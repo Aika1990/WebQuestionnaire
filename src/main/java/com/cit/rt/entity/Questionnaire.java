@@ -9,10 +9,10 @@ public class Questionnaire {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "questionnaire_num_id")
+    @JoinColumn(name = "questionnaire_num_id", nullable = false)
     private QuestionnaireNum questionnaireNum;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "answer_id")
+    @JoinColumn(name = "answer_id", nullable = false)
     private Answer answer;
     @Column(name = "description_other")
     private String descriptionOther;
