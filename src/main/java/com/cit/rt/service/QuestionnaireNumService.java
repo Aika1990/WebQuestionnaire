@@ -9,6 +9,6 @@ public interface QuestionnaireNumService {
 
     public List<QuestionnaireNum> getAllQuestionnaireNums();
     public QuestionnaireNum getQuestionnaireNumById(Integer id) throws ResourceNotFoundException;
-    public void saveQuestionnaireNum(QuestionnaireNum questionnaireNum);
+    public QuestionnaireNum saveQuestionnaireNum(QuestionnaireNum questionnaireNum);
     public void deleteQuestionnaireNumById(Integer id) throws ResourceNotFoundException;
 }
