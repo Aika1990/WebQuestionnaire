@@ -1,18 +1,27 @@
 package com.cit.rt.controller.dto;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class AnswerDTO {
 
+    @SerializedName("id")
+    @Expose
     public Integer id;
+    @SerializedName("name")
+    @Expose
     public String name;
-    public String question;
+    @SerializedName("questionId")
+    @Expose
+    public Integer questionId;
 
     public AnswerDTO() {
     }
 
-    public AnswerDTO(Integer id, String name, String question) {
+    public AnswerDTO(Integer id, String name, Integer questionId) {
         this.id = id;
         this.name = name;
-        this.question = question;
+        this.questionId = questionId;
     }
 
     public Integer getId() {
@@ -31,11 +40,11 @@ public class AnswerDTO {
         this.name = name;
     }
 
-    public String getQuestion() {
-        return question;
+    public Integer getQuestionId() {
+        return questionId;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
     }
 }

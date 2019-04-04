@@ -1,10 +1,11 @@
 package com.cit.rt.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "questionnaire_numb")
-public class QuestionnaireNum {
+public class QuestionnaireNum implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -9,6 +9,7 @@ public interface DistrictService {
 
     List<District> getAllDistricts();
     void saveDistrict(District district);
+    District districtsave(District district);
     District getDistrictById(Integer id) throws ResourceNotFoundException;
     void deleteDistrictById(Integer id) throws ResourceNotFoundException;
     District findByNameDistrict(String name);

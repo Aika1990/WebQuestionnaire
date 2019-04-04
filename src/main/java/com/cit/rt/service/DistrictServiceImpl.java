@@ -35,6 +35,11 @@ public class DistrictServiceImpl implements DistrictService{
     }
 
     @Override
+    public District districtsave(District district) {
+        return districtRepository.save(district);
+    }
+
+    @Override
     @Transactional
     public void deleteDistrictById(Integer id) {
         districtRepository.deleteById(id);

@@ -1,20 +1,29 @@
 package com.cit.rt.controller.dto;
 
-public class QuestionnaireDTO {
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
+public class QuestionnaireDTO implements Serializable {
+
+    @SerializedName("id")
     public Integer id;
-    public String questionnaireNum;
-    public String answer;
+    @SerializedName("questionnaireNumId")
+    public Integer questionnaireNumId;
+    @SerializedName("answerId")
+    public Integer answerId;
+    @SerializedName("descriptionOther")
     public String descriptionOther;
-    public String idParentAnswer;
+    @SerializedName("idParentAnswer")
+    public Integer idParentAnswer;
 
     public QuestionnaireDTO() {
     }
 
-    public QuestionnaireDTO(Integer id, String questionnaireNum, String answer, String descriptionOther, String idParentAnswer) {
+    public QuestionnaireDTO(Integer id, Integer questionnaireNumId, Integer answerId, String descriptionOther, Integer idParentAnswer) {
         this.id = id;
-        this.questionnaireNum = questionnaireNum;
-        this.answer = answer;
+        this.questionnaireNumId = questionnaireNumId;
+        this.answerId = answerId;
         this.descriptionOther = descriptionOther;
         this.idParentAnswer = idParentAnswer;
     }
@@ -27,20 +36,20 @@ public class QuestionnaireDTO {
         this.id = id;
     }
 
-    public String getQuestionnaireNum() {
-        return questionnaireNum;
+    public Integer getQuestionnaireNumId() {
+        return questionnaireNumId;
     }
 
-    public void setQuestionnaireNum(String questionnaireNum) {
-        this.questionnaireNum = questionnaireNum;
+    public void setQuestionnaireNumId(Integer questionnaireNumId) {
+        this.questionnaireNumId = questionnaireNumId;
     }
 
-    public String getAnswer() {
-        return answer;
+    public Integer getAnswerId() {
+        return answerId;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setAnswerId(Integer answerId) {
+        this.answerId = answerId;
     }
 
     public String getDescriptionOther() {
@@ -51,11 +60,11 @@ public class QuestionnaireDTO {
         this.descriptionOther = descriptionOther;
     }
 
-    public String getIdParentAnswer() {
+    public Integer getIdParentAnswer() {
         return idParentAnswer;
     }
 
-    public void setIdParentAnswer(String idParentAnswer) {
+    public void setIdParentAnswer(Integer idParentAnswer) {
         this.idParentAnswer = idParentAnswer;
     }
 }

@@ -11,4 +11,6 @@ public interface AppSettingsService {
     public AppSettings getAppSettingsById(Integer id) throws ResourceNotFoundException;
     public void saveAppSettings(AppSettings appSettings);
     public void deleteAppSettingsById(Integer id) throws ResourceNotFoundException;
+
+    AppSettings saveAppSetting(AppSettings appSettings);
 }

@@ -1,16 +1,22 @@
 package com.cit.rt.controller.dto;
 
-public class QuestionnaireNumDTO {
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
+public class QuestionnaireNumDTO implements Serializable {
+
+    @SerializedName("id")
     public Integer id;
-    public String appSettings;
+    @SerializedName("appSettingsId")
+    public Integer appSettingsId;
 
     public QuestionnaireNumDTO() {
     }
 
-    public QuestionnaireNumDTO(Integer id, String appSettings) {
+    public QuestionnaireNumDTO(Integer id, Integer appSettingsId) {
         this.id = id;
-        this.appSettings = appSettings;
+        this.appSettingsId = appSettingsId;
     }
 
     public Integer getId() {
@@ -21,11 +27,11 @@ public class QuestionnaireNumDTO {
         this.id = id;
     }
 
-    public String getAppSettings() {
-        return appSettings;
+    public Integer getAppSettingsId() {
+        return appSettingsId;
     }
 
-    public void setAppSettings(String appSettings) {
-        this.appSettings = appSettings;
+    public void setAppSettingsId(Integer appSettingsId) {
+        this.appSettingsId = appSettingsId;
     }
 }

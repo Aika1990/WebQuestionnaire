@@ -38,4 +38,9 @@ public class AppSettingsServiceImpl implements AppSettingsService {
     public void deleteAppSettingsById(Integer id) {
         appSettingsRepository.deleteById(id);
     }
+
+    @Override
+    public AppSettings saveAppSetting(AppSettings appSettings) {
+        return appSettingsRepository.save(appSettings);
+    }
 }

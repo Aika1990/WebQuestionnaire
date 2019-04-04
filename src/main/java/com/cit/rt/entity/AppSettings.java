@@ -1,10 +1,11 @@
 package com.cit.rt.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "app_settings")
-public class AppSettings {
+public class AppSettings implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,6 +27,13 @@ public class AppSettings {
     public AppSettings() {
     }
 
+    public AppSettings(Integer id, Settlement settlement, String lastName, String firstName, String phone) {
+        this.id = id;
+        this.settlement = settlement;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.phone = phone;
+    }
     public AppSettings(Settlement settlement, String lastName, String firstName, String phone) {
         this.settlement = settlement;
         this.lastName = lastName;
@@ -41,7 +49,7 @@ public class AppSettings {
         this.id = id;
     }
 
-    public Settlement getSettlement() {
+    public Settlement getSettlement(Settlement settlementById) {
         return settlement;
     }
 

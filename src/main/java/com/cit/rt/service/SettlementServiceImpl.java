@@ -34,6 +34,11 @@ public class SettlementServiceImpl implements SettlementService {
     }
 
     @Override
+    public Settlement settlementSave(Settlement settlement) {
+        return settlementRepository.save(settlement);
+    }
+
+    @Override
     @Transactional
     public void deleteSettlementById(Integer id) {
         settlementRepository.deleteById(id);

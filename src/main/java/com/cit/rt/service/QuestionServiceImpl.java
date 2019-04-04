@@ -34,6 +34,11 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public Question questionSave(Question question) {
+        return questionRepository.save(question);
+    }
+
+    @Override
     @Transactional
     public void deleteQuestionById(Integer id) {
         questionRepository.deleteById(id);

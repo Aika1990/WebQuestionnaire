@@ -34,6 +34,11 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
+    public Answer answersave(Answer answer) {
+        return answerRepository.save(answer);
+    }
+
+    @Override
     @Transactional
     public void deleteAnswerById(Integer id) {
         answerRepository.deleteById(id);

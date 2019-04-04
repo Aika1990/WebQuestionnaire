@@ -15,7 +15,7 @@ public class Settlement {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "district_id", nullable = false)
     private District district;
 
@@ -23,6 +23,12 @@ public class Settlement {
     }
 
     public Settlement(String name, District district) {
+        this.name = name;
+        this.district = district;
+    }
+
+    public Settlement(Integer id, String name, District district) {
+        this.id = id;
         this.name = name;
         this.district = district;
     }

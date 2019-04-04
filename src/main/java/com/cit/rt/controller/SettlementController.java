@@ -34,7 +34,7 @@ public class SettlementController {
                 SettlementDTO settlementDTO = new SettlementDTO();
                 settlementDTO.setId(settlement.getId());
                 settlementDTO.setName(settlement.getName());
-                settlementDTO.setDistrict(settlement.getDistrict().getName());
+               // settlementDTO.setDistrict(settlement.getDistrict().getName());
                 settlementDTOs.add(settlementDTO);
             }
         }
@@ -68,7 +68,7 @@ public class SettlementController {
         SettlementDTO settlementDTO = new SettlementDTO();
         settlementDTO.setId(settlement.getId());
         settlementDTO.setName(settlement.getName());
-        settlementDTO.setDistrict(settlement.getDistrict().getName());
+        //settlementDTO.setDistrict(settlement.getDistrict().getName(););
         model.addAttribute("settlementDTO", settlementDTO);
         model.addAttribute("edit", true);
         return "settlement-form";

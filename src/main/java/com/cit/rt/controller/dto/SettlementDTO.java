@@ -3,16 +3,17 @@ package com.cit.rt.controller.dto;
 public class SettlementDTO {
 
     public Integer id;
-    public String district;
     public String name;
+    public Integer districtId;
 
     public SettlementDTO() {
     }
 
-    public SettlementDTO(Integer id, String district, String name) {
+
+    public SettlementDTO(Integer id, String name, Integer districtId) {
         this.id = id;
-        this.district = district;
         this.name = name;
+        this.districtId = districtId;
     }
 
     public Integer getId() {
@@ -23,19 +24,19 @@ public class SettlementDTO {
         this.id = id;
     }
 
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(Integer districtId) {
+        this.districtId = districtId;
     }
 }

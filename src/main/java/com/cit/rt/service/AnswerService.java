@@ -9,6 +9,7 @@ public interface AnswerService {
 
     public List<Answer> getAllAnswers();
     public void saveAnswer(Answer answer);
+    Answer answersave(Answer answer);
     public Answer getAnswerById(Integer id) throws ResourceNotFoundException;
     public void deleteAnswerById(Integer id) throws ResourceNotFoundException;
 }

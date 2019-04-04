@@ -10,5 +10,6 @@ public interface QuestionService {
     public List<Question> getAllQuestions();
     public Question getQuestionById(Integer id) throws ResourceNotFoundException;
     public void saveQuestion(Question question);
+    Question questionSave(Question question);
     public void deleteQuestionById(Integer id) throws ResourceNotFoundException;
 }
