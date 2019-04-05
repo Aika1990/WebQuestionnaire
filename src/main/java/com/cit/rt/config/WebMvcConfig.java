@@ -1,20 +1,25 @@
 package com.cit.rt.config;
 
+import com.cit.rt.viewResolver.CsvViewResolver;
+import com.cit.rt.viewResolver.ExcelViewResolver;
+import com.cit.rt.viewResolver.PdfViewResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
+import org.springframework.http.MediaType;
+import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -47,7 +52,57 @@ public class WebMvcConfig  implements WebMvcConfigurer {
         return characterEncodingFilter;
     }
 
-//    @Bean
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer
+                .defaultContentType(MediaType.APPLICATION_JSON)
+                .favorPathExtension(true);
+    }
+
+    @Bean
+    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
+        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+        resolver.setContentNegotiationManager(manager);
+
+        // Define all possible view resolvers
+        List<ViewResolver> resolvers = new ArrayList<>();
+
+        resolvers.add(csvViewResolver());
+        resolvers.add(excelViewResolver());
+        resolvers.add(pdfViewResolver());
+
+        resolver.setViewResolvers(resolvers);
+        return resolver;
+    }
+
+    /*
+     * Configure View resolver to provide XLS output using Apache POI library to
+     * generate XLS output for an object content
+     */
+    @Bean
+    public ViewResolver excelViewResolver() {
+        return new ExcelViewResolver();
+    }
+
+    /*
+     * Configure View resolver to provide Csv output using Super Csv library to
+     * generate Csv output for an object content
+     */
+    @Bean
+    public ViewResolver csvViewResolver() {
+        return new CsvViewResolver();
+    }
+
+    /*
+     * Configure View resolver to provide Pdf output using iText library to
+     * generate pdf output for an object content
+     */
+    @Bean
+    public ViewResolver pdfViewResolver() {
+        return new PdfViewResolver();
+    }
+
+    //    @Bean
 //    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
 //        MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
 //        mappingJackson2HttpMessageConverter.setPrettyPrint(true);

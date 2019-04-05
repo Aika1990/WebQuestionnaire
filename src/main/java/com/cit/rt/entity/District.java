@@ -1,7 +1,10 @@
 package com.cit.rt.entity;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
+@Component
 @Entity
 @Table (name = "district")
 public class District {
@@ -41,6 +44,11 @@ public class District {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public int getColumnCount() {
+
+        return getClass().getDeclaredFields().length;
     }
 
 //    public Set<Settlement> getSettlements() {
