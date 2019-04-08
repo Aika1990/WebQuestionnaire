@@ -13,21 +13,22 @@ public class Questionnaire implements Serializable {
     @JoinColumn(name = "questionnaire_num_id", nullable = false)
     private QuestionnaireNum questionnaireNum;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "answer_id", nullable = false)
+    @JoinColumn(name = "question_id", nullable = false)
+    private Question question;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "answer_id")
     private Answer answer;
     @Column(name = "description_other")
     private String descriptionOther;
-    @Column(name = "id_parent_answer")
-    private Integer idParentAnswer;
 
     public Questionnaire() {
     }
 
-    public Questionnaire(QuestionnaireNum questionnaireNum, Answer answer, String descriptionOther, int idParentAnswer) {
+    public Questionnaire(QuestionnaireNum questionnaireNum, Question question, Answer answer, String descriptionOther) {
         this.questionnaireNum = questionnaireNum;
+        this.question = question;
         this.answer = answer;
         this.descriptionOther = descriptionOther;
-        this.idParentAnswer = idParentAnswer;
     }
 
     public Integer getId() {
@@ -62,12 +63,12 @@ public class Questionnaire implements Serializable {
         this.descriptionOther = descriptionOther;
     }
 
-    public int getIdParentAnswer() {
-        return idParentAnswer;
+    public Question getQuestion() {
+        return question;
     }
 
-    public void setIdParentAnswer(int idParentAnswer) {
-        this.idParentAnswer = idParentAnswer;
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     @Override
@@ -77,7 +78,6 @@ public class Questionnaire implements Serializable {
                 ", questionnaireNum=" + questionnaireNum +
                 ", answer=" + answer +
                 ", descriptionOther='" + descriptionOther + '\'' +
-                ", idParentAnswer=" + idParentAnswer +
                 '}';
     }
 }

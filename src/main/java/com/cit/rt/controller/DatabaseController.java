@@ -215,11 +215,11 @@ public class DatabaseController {
         settlementService.saveSettlement(new Settlement("Ак-Довурак", district));
 
 
-        Question question = questionService.questionSave(new Question("Где проживает Ваша семья:", "radioType"));
+        questionService.questionSave(new Question("Где проживает Ваша семья:", "radioType"));
 
-        question = questionService.questionSave(new Question("Сколько человек в Вашей семье?", "textType"));
+        questionService.questionSave(new Question("Сколько человек в Вашей семье?", "textType"));
 
-        question = questionService.questionSave(new Question("Состоите ли Вы в браке?", "radioType"));
+        Question question  = questionService.questionSave(new Question("Состоите ли Вы в браке?", "radioType"));
         answerService.saveAnswer(new Answer("в зарегистрированном браке", question));
         answerService.saveAnswer(new Answer("в незарегистрированном браке(гражданский брак)", question));
         answerService.saveAnswer(new Answer("разведен(а) официально (развод зарегистрирован)", question));
@@ -227,7 +227,7 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("вдова/вдовец", question));
         answerService.saveAnswer(new Answer("никогда не состоял(а) в браке (в зарегистрированном или незарегистрированном)", question));
 
-        question = questionService.questionSave(new Question("Укажите состав Вашей семьи:", "radioType"));
+        question = questionService.questionSave(new Question("Укажите состав Вашей семьи: Совместно проживающие члены семьи:", "radioType"));
         answerService.saveAnswer(new Answer("Муж/Жена", question));
         answerService.saveAnswer(new Answer("Сын/Дочь", question));
         answerService.saveAnswer(new Answer("Брат/Сестра", question));
@@ -244,7 +244,8 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("Сват/Сватья", question));
         answerService.saveAnswer(new Answer("Кузен/Кузина", question));
 
-        question = questionService.questionSave(new Question("Возраст (количество полных лет):", "textType"));
+        questionService.questionSave(new Question("Возраст (количество полных лет):", "textType"));
+
 
         question = questionService.questionSave(new Question("Пол:", "radioType"));
         answerService.saveAnswer(new Answer("м", question));
@@ -290,7 +291,7 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("помощь благотворительных фондов", question));
         answerService.saveAnswer(new Answer("выигрыши в лотореи и прочие игры", question));
 
-        question = questionService.questionSave(new Question("Сколько составляет общий доход  ВСЕХ членов Вашей семьи в месяц (в рублях)?", "textType"));
+        questionService.questionSave(new Question("Сколько составляет общий доход  ВСЕХ членов Вашей семьи в месяц (в рублях)?", "textType"));
 
         question = questionService.questionSave(new Question("Перечислите основные ежемесячные расходы Вашей семьи (основные траты):", "textType"));
         answerService.saveAnswer(new Answer("питание", question));
@@ -304,7 +305,7 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("развлечения: театр, кино, прогулки и пр.", question));
         answerService.saveAnswer(new Answer("ведения ЛПХ (приобретение удобрений, кормов, с/х инвентаря, семян и пр.", question));
 
-        question = questionService.questionSave(new Question("Общий расход ВСЕХ членов Вашей семьи в месяц (в рублях)?", "textType"));
+        questionService.questionSave(new Question("Общий расход ВСЕХ членов Вашей семьи в месяц (в рублях)?", "textType"));
 
         question = questionService.questionSave(new Question("Для чего Вам приходилось одалживать:", "checkType"));
         answerService.saveAnswer(new Answer("на самые необходимые расходы: еда, оплата жилья и коммунальных услуг, лекарства", question));

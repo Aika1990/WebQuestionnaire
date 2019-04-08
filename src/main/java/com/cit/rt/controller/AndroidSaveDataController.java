@@ -13,7 +13,6 @@ import com.cit.rt.service.DistrictService;
 import com.cit.rt.service.QuestionService;
 import com.cit.rt.service.SettlementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

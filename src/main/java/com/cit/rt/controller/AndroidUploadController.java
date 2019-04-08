@@ -31,6 +31,9 @@ class AndroidUploadController {
     @Autowired
     AnswerService answerService;
 
+    @Autowired
+    QuestionService questionService;
+
     @RequestMapping(value = "android/appSettings/find/{id}", method = RequestMethod.GET, produces = {
             MimeTypeUtils.APPLICATION_JSON_VALUE
     })
@@ -82,8 +85,7 @@ class AndroidUploadController {
             if(questionnaireDTOs.size() > 0) {
                 for (QuestionnaireDTO questionnaireDTO : questionnaireDTOs) {
                     questionnaireService.saveQuestionnaire(new Questionnaire(questionnaireNumService.getQuestionnaireNumById(questionnaireDTO.getQuestionnaireNumId()),
-                            answerService.getAnswerById(questionnaireDTO.getAnswerId()), questionnaireDTO.getDescriptionOther(),
-                            questionnaireDTO.getIdParentAnswer()));
+                            questionService.getQuestionById(questionnaireDTO.getQuestionId()), answerService.getAnswerById(questionnaireDTO.getAnswerId()), questionnaireDTO.getDescriptionOther()));
                 }
             }
         }catch (Exception e) {

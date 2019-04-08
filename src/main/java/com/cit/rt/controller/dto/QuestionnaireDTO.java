@@ -10,22 +10,22 @@ public class QuestionnaireDTO implements Serializable {
     public Integer id;
     @SerializedName("questionnaireNumId")
     public Integer questionnaireNumId;
+    @SerializedName("questionId")
+    public Integer questionId;
     @SerializedName("answerId")
     public Integer answerId;
     @SerializedName("descriptionOther")
     public String descriptionOther;
-    @SerializedName("idParentAnswer")
-    public Integer idParentAnswer;
 
     public QuestionnaireDTO() {
     }
 
-    public QuestionnaireDTO(Integer id, Integer questionnaireNumId, Integer answerId, String descriptionOther, Integer idParentAnswer) {
+    public QuestionnaireDTO(Integer id, Integer questionnaireNumId, Integer questionId, Integer answerId, String descriptionOther) {
         this.id = id;
         this.questionnaireNumId = questionnaireNumId;
+        this.questionId = questionId;
         this.answerId = answerId;
         this.descriptionOther = descriptionOther;
-        this.idParentAnswer = idParentAnswer;
     }
 
     public Integer getId() {
@@ -60,11 +60,11 @@ public class QuestionnaireDTO implements Serializable {
         this.descriptionOther = descriptionOther;
     }
 
-    public Integer getIdParentAnswer() {
-        return idParentAnswer;
+    public Integer getQuestionId() {
+        return questionId;
     }
 
-    public void setIdParentAnswer(Integer idParentAnswer) {
-        this.idParentAnswer = idParentAnswer;
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
     }
 }

@@ -81,14 +81,14 @@ public class AppSettings implements Serializable {
         this.phone = phone;
     }
 
-    @Override
-    public String toString() {
-        return "AppSettings{" +
-                "id=" + id +
-                ", settlement=" + settlement +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "AppSettings{" +
+//                "id=" + id +
+//                ", settlement=" + settlement +
+//                ", lastName='" + lastName + '\'' +
+//                ", firstName='" + firstName + '\'' +
+//                ", phone='" + phone + '\'' +
+//                '}';
+//    }
 }
