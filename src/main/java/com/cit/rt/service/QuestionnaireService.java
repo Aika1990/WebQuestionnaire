@@ -11,4 +11,5 @@ public interface QuestionnaireService {
     public Questionnaire getQuestionnaireById(Integer id) throws ResourceNotFoundException;
     public void saveQuestionnaire(Questionnaire questionnaire);
     public void deleteQuestionnaireById(Integer id) throws ResourceNotFoundException;
+    void deleteAllQuestionnaire();
 }

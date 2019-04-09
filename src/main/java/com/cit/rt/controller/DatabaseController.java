@@ -252,7 +252,7 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("ж", question));
 
         question = questionService.questionSave(new Question("Занятость членов семьи:", "radioType"));
-        answerService.saveAnswer(new Answer("рабатает", question));
+        answerService.saveAnswer(new Answer("работает", question));
         answerService.saveAnswer(new Answer("безработный", question));
         answerService.saveAnswer(new Answer("предприниматель", question));
         answerService.saveAnswer(new Answer("состоит на учете ЦЗН", question));
@@ -295,7 +295,7 @@ public class DatabaseController {
 
         question = questionService.questionSave(new Question("Перечислите основные ежемесячные расходы Вашей семьи (основные траты):", "textType"));
         answerService.saveAnswer(new Answer("питание", question));
-        answerService.saveAnswer(new Answer("оплата жилья и коммунальный улуг", question));
+        answerService.saveAnswer(new Answer("оплата жилья и коммунальных услуг", question));
         answerService.saveAnswer(new Answer("оплата за сад, обучение, секции", question));
         answerService.saveAnswer(new Answer("приобретение одежды, обуви", question));
         answerService.saveAnswer(new Answer("приобретение лекарств, оплата лечения, анализов", question));
@@ -383,7 +383,7 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("дом с частичными удобствами", question));
         answerService.saveAnswer(new Answer("съемное жилье", question));
         answerService.saveAnswer(new Answer("жилплощадь в общежитии", question));
-        answerService.saveAnswer(new Answer("часть квартиры (дома), где живут роственники", question));
+        answerService.saveAnswer(new Answer("часть квартиры (дома), где живут родственники", question));
 
         question = questionService.questionSave(new Question("Есть ли перед Вашей семьей остро стоит жилищный вопрос, как Вы его решаете?", "checkType"));
         answerService.saveAnswer(new Answer("такой вопрос не стоит", question));
@@ -398,7 +398,7 @@ public class DatabaseController {
 
         question = questionService.questionSave(new Question("Имеет ли Ваша семья (кто-нибудь из членов Вашей семьи) еще одно жилье:", "checkType"));
         answerService.saveAnswer(new Answer("отдельная квартира", question));
-        answerService.saveAnswer(new Answer("индиидуальный дом", question));
+        answerService.saveAnswer(new Answer("индивидуальный дом", question));
         answerService.saveAnswer(new Answer("комната (несколько комнат) в общежитии (квартире)", question));
         answerService.saveAnswer(new Answer("дача/коллективный огород", question));
         answerService.saveAnswer(new Answer("гараж стационарный/бокс", question));
@@ -506,5 +506,4 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("заниматься животноводством/растениеводством", question));
         answerService.saveAnswer(new Answer("доступные кредитные ресурсы", question));
     }
-
 }

@@ -52,16 +52,31 @@ class AndroidUploadController {
         }
     }
 
+    @RequestMapping(value = "android/clearAll", method = RequestMethod.GET, produces = {
+            MimeTypeUtils.APPLICATION_JSON_VALUE
+    })
+    public void clearAll() {
+        questionnaireService.deleteAllQuestionnaire();
+        questionnaireNumService.deleteAllQuestionnaireNum();
+        appSettingsService.deleteAllAppSettings();
+    }
+
     @RequestMapping(value = "android/appSettings/save", method = RequestMethod.POST, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE}, headers = "Accept=application/json")
     @ResponseBody
     public AppSettingsDTO save(@RequestBody AppSettingsDTO appSettingsDTO) {
         try {
-            AppSettings appSettings = appSettingsService.saveAppSetting(new AppSettings(settlementService.getSettlementById(appSettingsDTO.getSettlement()),
-                    appSettingsDTO.getLastName(), appSettingsDTO.getFirstName(), appSettingsDTO.getPhone()));
-            AppSettingsDTO settingsDTO = new AppSettingsDTO();
-            settingsDTO.setId(appSettings.getId());
-            return settingsDTO;
-
+            AppSettings appSettings = appSettingsService.findByDetailsAppsettings(appSettingsDTO.lastName, appSettingsDTO.firstName, appSettingsDTO.phone);
+            if(appSettings != null) {
+                AppSettingsDTO settingsDTO = new AppSettingsDTO();
+                settingsDTO.setId(appSettings.getId());
+                return settingsDTO;
+            } else {
+                appSettings = appSettingsService.saveAppSetting(new AppSettings(settlementService.getSettlementById(appSettingsDTO.getSettlement()),
+                        appSettingsDTO.getLastName(), appSettingsDTO.getFirstName(), appSettingsDTO.getPhone()));
+                AppSettingsDTO settingsDTO = new AppSettingsDTO();
+                settingsDTO.setId(appSettings.getId());
+                return settingsDTO;
+            }
         }catch (Exception e) {
             return null;
         }
@@ -74,23 +89,33 @@ class AndroidUploadController {
             QuestionnaireNum questionnaireNum = questionnaireNumService.saveQuestionnaireNum(new QuestionnaireNum(appSettingsService.getAppSettingsById(questionnaireNumDTO.appSettingsId)));
             return new QuestionnaireNumDTO(questionnaireNum.getId(), questionnaireNum.getAppSettings().getId());
         }catch (Exception e) {
+            System.out.print(e.getMessage());
             return null;
         }
     }
 
     @RequestMapping(value = "android/questionnaires/save", method = RequestMethod.POST, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE}, headers = "Accept=application/json")
     @ResponseBody
-    public void save(@RequestBody List<QuestionnaireDTO> questionnaireDTOs) {
+    public List<QuestionnaireDTO> save(@RequestBody List<QuestionnaireDTO> questionnaireDTOs) {
         try {
             if(questionnaireDTOs.size() > 0) {
                 for (QuestionnaireDTO questionnaireDTO : questionnaireDTOs) {
-                    questionnaireService.saveQuestionnaire(new Questionnaire(questionnaireNumService.getQuestionnaireNumById(questionnaireDTO.getQuestionnaireNumId()),
-                            questionService.getQuestionById(questionnaireDTO.getQuestionId()), answerService.getAnswerById(questionnaireDTO.getAnswerId()), questionnaireDTO.getDescriptionOther()));
+                    if(questionnaireDTO.answerId == null) {
+                        questionnaireService.saveQuestionnaire(new Questionnaire(questionnaireNumService.getQuestionnaireNumById(questionnaireDTO.getQuestionnaireNumId()),
+                                questionService.getQuestionById(questionnaireDTO.getQuestionId()), null, questionnaireDTO.getDescriptionOther()));
+                    } else {
+                        questionnaireService.saveQuestionnaire(new Questionnaire(questionnaireNumService.getQuestionnaireNumById(questionnaireDTO.getQuestionnaireNumId()),
+                                questionService.getQuestionById(questionnaireDTO.getQuestionId()), answerService.getAnswerById(Integer.parseInt(questionnaireDTO.getAnswerId())), questionnaireDTO.getDescriptionOther()));
+                    }
+
                 }
+                return questionnaireDTOs;
             }
         }catch (Exception e) {
-
+            System.out.print(e.getMessage());
+            //return null;
         }
+        return null;
     }
 
 //    private static String UPLOAD_DIR = "uploads";

@@ -43,4 +43,14 @@ public class AppSettingsServiceImpl implements AppSettingsService {
     public AppSettings saveAppSetting(AppSettings appSettings) {
         return appSettingsRepository.save(appSettings);
     }
+
+    @Override
+    public void deleteAllAppSettings() {
+        appSettingsRepository.deleteAll();
+    }
+
+    @Override
+    public AppSettings findByDetailsAppsettings(String lastName, String firstName, String phone) {
+        return appSettingsRepository.findByDetailsAppsettings(lastName, firstName, phone);
+    }
 }

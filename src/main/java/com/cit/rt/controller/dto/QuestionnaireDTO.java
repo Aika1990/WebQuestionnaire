@@ -13,14 +13,14 @@ public class QuestionnaireDTO implements Serializable {
     @SerializedName("questionId")
     public Integer questionId;
     @SerializedName("answerId")
-    public Integer answerId;
+    public String answerId;
     @SerializedName("descriptionOther")
     public String descriptionOther;
 
     public QuestionnaireDTO() {
     }
 
-    public QuestionnaireDTO(Integer id, Integer questionnaireNumId, Integer questionId, Integer answerId, String descriptionOther) {
+    public QuestionnaireDTO(Integer id, Integer questionnaireNumId, Integer questionId, String answerId, String descriptionOther) {
         this.id = id;
         this.questionnaireNumId = questionnaireNumId;
         this.questionId = questionId;
@@ -44,11 +44,11 @@ public class QuestionnaireDTO implements Serializable {
         this.questionnaireNumId = questionnaireNumId;
     }
 
-    public Integer getAnswerId() {
+    public String getAnswerId() {
         return answerId;
     }
 
-    public void setAnswerId(Integer answerId) {
+    public void setAnswerId(String answerId) {
         this.answerId = answerId;
     }
 

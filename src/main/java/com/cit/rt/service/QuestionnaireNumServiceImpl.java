@@ -39,4 +39,9 @@ public class QuestionnaireNumServiceImpl implements QuestionnaireNumService {
     public void deleteQuestionnaireNumById(Integer id) {
         questionnaireNumRepository.deleteById(id);
     }
+
+    @Override
+    public void deleteAllQuestionnaireNum() {
+        questionnaireNumRepository.deleteAll();
+    }
 }

@@ -39,4 +39,9 @@ public class QuestionnaireServiceImpl implements QuestionnaireService{
     public void deleteQuestionnaireById(Integer id) {
         questionnaireRepository.deleteById(id);
     }
+
+    @Override
+    public void deleteAllQuestionnaire() {
+        questionnaireRepository.deleteAll();
+    }
 }
