@@ -30,8 +30,8 @@ public class DatabaseController {
     @Autowired
     private AnswerService answerService;
 
-    @GetMapping("/saveDatabase")
-    public void setDatabase (Model model) throws ResourceNotFoundException {
+    @GetMapping("/save")
+    public String setDatabase(Model model) throws ResourceNotFoundException {
 
         districtService.saveDistrict(new District("Бай-Тайгинский"));
         districtService.saveDistrict(new District("Баруун-Хемчикский"));
@@ -212,14 +212,16 @@ public class DatabaseController {
 
         district = districtService.getDistrictById(18);
         settlementService.saveSettlement(new Settlement("Кызыл", district));
+        settlementService.saveSettlement(new Settlement("Кызыл (ЛДО)", district));
+        settlementService.saveSettlement(new Settlement("Кызыл (ПДО)", district));
+        settlementService.saveSettlement(new Settlement("Кызыл (Вавилинский)", district));
         settlementService.saveSettlement(new Settlement("Ак-Довурак", district));
-
 
         questionService.questionSave(new Question("Где проживает Ваша семья:", "radioType"));
 
         questionService.questionSave(new Question("Сколько человек в Вашей семье?", "textType"));
 
-        Question question  = questionService.questionSave(new Question("Состоите ли Вы в браке?", "radioType"));
+        Question question = questionService.questionSave(new Question("Состоите ли Вы в браке?", "radioType"));
         answerService.saveAnswer(new Answer("в зарегистрированном браке", question));
         answerService.saveAnswer(new Answer("в незарегистрированном браке(гражданский брак)", question));
         answerService.saveAnswer(new Answer("разведен(а) официально (развод зарегистрирован)", question));
@@ -228,8 +230,10 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("никогда не состоял(а) в браке (в зарегистрированном или незарегистрированном)", question));
 
         question = questionService.questionSave(new Question("Укажите состав Вашей семьи: Совместно проживающие члены семьи:", "radioType"));
+        answerService.saveAnswer(new Answer("Глава семьи", question));
         answerService.saveAnswer(new Answer("Муж/Жена", question));
         answerService.saveAnswer(new Answer("Сын/Дочь", question));
+        answerService.saveAnswer(new Answer("Отец/Мать", question));
         answerService.saveAnswer(new Answer("Брат/Сестра", question));
         answerService.saveAnswer(new Answer("Дедушка/Бабушка", question));
         answerService.saveAnswer(new Answer("Теща/свекровь", question));
@@ -246,7 +250,6 @@ public class DatabaseController {
 
         questionService.questionSave(new Question("Возраст (количество полных лет):", "textType"));
 
-
         question = questionService.questionSave(new Question("Пол:", "radioType"));
         answerService.saveAnswer(new Answer("м", question));
         answerService.saveAnswer(new Answer("ж", question));
@@ -256,18 +259,23 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("безработный", question));
         answerService.saveAnswer(new Answer("предприниматель", question));
         answerService.saveAnswer(new Answer("состоит на учете ЦЗН", question));
-        answerService.saveAnswer(new Answer("дошкольник", question));
-        answerService.saveAnswer(new Answer("школьник", question));
-        answerService.saveAnswer(new Answer("студент", question));
+        answerService.saveAnswer(new Answer("пропустить", question));
+
+        question = questionService.questionSave(new Question("Занятость членов семьи для детей:", "radioType"));
+        answerService.saveAnswer(new Answer("неорганизованный (не ходит в я/с)", question));
+        answerService.saveAnswer(new Answer("организованный (ходит в я/с)", question));
+        answerService.saveAnswer(new Answer("школьник, студент", question));
+        answerService.saveAnswer(new Answer("пропустить", question));
 
         question = questionService.questionSave(new Question("Социальный статус:", "radioType"));
         answerService.saveAnswer(new Answer("пенсионер", question));
         answerService.saveAnswer(new Answer("инвалид", question));
         answerService.saveAnswer(new Answer("находится под опекой (попечительством)", question));
+        answerService.saveAnswer(new Answer("мать (отец) одиночка", question));
         answerService.saveAnswer(new Answer("пропустить", question));
 
         question = questionService.questionSave(new Question("Укажите образование совершеннолетних членов Вашей семьи:", "radioType"));
-        answerService.saveAnswer(new Answer("высшее образование", question));
+        answerService.saveAnswer(new Answer("высшее образование, в том числе бакалавриат, магистратура", question));
         answerService.saveAnswer(new Answer("незаконченное высшее (3 курса ВУЗа)", question));
         answerService.saveAnswer(new Answer("среднее специальное (техникум, колледж, ПУ)", question));
         answerService.saveAnswer(new Answer("среднее общее (10/11 классов)", question));
@@ -275,141 +283,20 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("начальное образование (1-4 классов)", question));
         answerService.saveAnswer(new Answer("не имеет начального образования", question));
 
-        question = questionService.questionSave(new Question("Перечислите источники средств к существованию Вашей семьи в среднем на 1 месяц:", "checkType"));
-        answerService.saveAnswer(new Answer("заработная плата", question));
-        answerService.saveAnswer(new Answer("доход от предпринимательской деятельности", question));
-        answerService.saveAnswer(new Answer("доходы от продажи продуктов с ЛПХ, собранных грибов, ягод, продуктов охоты, рыболовства", question));
-        answerService.saveAnswer(new Answer("доход от сдачи собственности в аренду", question));
-        answerService.saveAnswer(new Answer("пенсия всех видов", question));
-        answerService.saveAnswer(new Answer("пособие по безработице", question));
-        answerService.saveAnswer(new Answer("алименты", question));
-        answerService.saveAnswer(new Answer("стипендии", question));
-        answerService.saveAnswer(new Answer("налоговые вычеты (имущественные, социальные, стандартные)", question));
-        answerService.saveAnswer(new Answer("пособия на детей и другие денежные субсидии (ЖКХ), компенсации(род.плата), льготы (проезд)", question));
-        answerService.saveAnswer(new Answer("страховые возмещения (пособия по временной нетрудоспособности)", question));
-        answerService.saveAnswer(new Answer("деньги, подарки, вещи от родственников, других частных лиц", question));
-        answerService.saveAnswer(new Answer("помощь благотворительных фондов", question));
-        answerService.saveAnswer(new Answer("выигрыши в лотореи и прочие игры", question));
-
-        questionService.questionSave(new Question("Сколько составляет общий доход  ВСЕХ членов Вашей семьи в месяц (в рублях)?", "textType"));
-
-        question = questionService.questionSave(new Question("Перечислите основные ежемесячные расходы Вашей семьи (основные траты):", "textType"));
-        answerService.saveAnswer(new Answer("питание", question));
-        answerService.saveAnswer(new Answer("оплата жилья и коммунальных услуг", question));
-        answerService.saveAnswer(new Answer("оплата за сад, обучение, секции", question));
-        answerService.saveAnswer(new Answer("приобретение одежды, обуви", question));
-        answerService.saveAnswer(new Answer("приобретение лекарств, оплата лечения, анализов", question));
-        answerService.saveAnswer(new Answer("приобретение мебели", question));
-        answerService.saveAnswer(new Answer("содержание личного транспорта", question));
-        answerService.saveAnswer(new Answer("оплата кредита, займа, ссуды", question));
-        answerService.saveAnswer(new Answer("развлечения: театр, кино, прогулки и пр.", question));
-        answerService.saveAnswer(new Answer("ведения ЛПХ (приобретение удобрений, кормов, с/х инвентаря, семян и пр.", question));
-
-        questionService.questionSave(new Question("Общий расход ВСЕХ членов Вашей семьи в месяц (в рублях)?", "textType"));
-
-        question = questionService.questionSave(new Question("Для чего Вам приходилось одалживать:", "checkType"));
-        answerService.saveAnswer(new Answer("на самые необходимые расходы: еда, оплата жилья и коммунальных услуг, лекарства", question));
-        answerService.saveAnswer(new Answer("покупка необходимой одежды и обуви", question));
-        answerService.saveAnswer(new Answer("приобретение самых необходимых лекарств и медикаментов, оплату экстренной медпомощи", question));
-        answerService.saveAnswer(new Answer("по другим причинам (указать, каким)", question));
-        answerService.saveAnswer(new Answer("не одалживаю денег ни у кого", question));
-
-        question = questionService.questionSave(new Question("Откладывают ли сбережения в вашей семье?", "radioType"));
-        answerService.saveAnswer(new Answer("да, ежемесячно", question));
-        answerService.saveAnswer(new Answer("от случая к случаю", question));
-        answerService.saveAnswer(new Answer("нет, не хватает денег даже на текущие расходы", question));
-
-        question = questionService.questionSave(new Question("В течение какого периода времени Ваша семья живет в стесненных материальных условиях?", "radioType"));
-        answerService.saveAnswer(new Answer("менее года", question));
-        answerService.saveAnswer(new Answer("от года до 2 лет", question));
-        answerService.saveAnswer(new Answer("от 3 до 5 лет", question));
-        answerService.saveAnswer(new Answer("от 6 до 10 лет", question));
-        answerService.saveAnswer(new Answer("более 10 лет", question));
-
-        question = questionService.questionSave(new Question("Ограничивает ли Ваша семья потребление продуктов питания?", "radioType"));
-        answerService.saveAnswer(new Answer("не ограничиваем", question));
-        answerService.saveAnswer(new Answer("ограничиваем иногда из-за нехватки денег", question));
-        answerService.saveAnswer(new Answer("ограничиваем всегда, живем в режиме жесткой экономии", question));
-
-        question = questionService.questionSave(new Question("Какова причина того, что Ваша семья имеет доходы ниже величины прожиточного минимума? (Справка: ВПМ на 3 кв. 2018 г. на душу населения - 10032 руб. в месяц)", "checkType"));
-        answerService.saveAnswer(new Answer("низкий уровень оплаты труда", question));
-        answerService.saveAnswer(new Answer("отсутствие работы (подработки) по месту жительства", question));
-        answerService.saveAnswer(new Answer("ухаживаю за больным членом семьи", question));
-        answerService.saveAnswer(new Answer("много несовершеннолетних в семье", question));
-        answerService.saveAnswer(new Answer("не позволяет работать состояние здоровья", question));
-        answerService.saveAnswer(new Answer("высокие цены на продукты питания и вещи", question));
-        answerService.saveAnswer(new Answer("отсутствие точек сбыта для реализации продукции с ЛПХ", question));
-        answerService.saveAnswer(new Answer("невысокий размер социальных выплат и пособий", question));
-
-        question = questionService.questionSave(new Question("Что из ниже перечисленного Вы предпринимали для того, чтобы изменить материальное благосостояние своей семьи?", "checkType"));
-        answerService.saveAnswer(new Answer("поменять место работы", question));
-        answerService.saveAnswer(new Answer("переехать в другой регион", question));
-        answerService.saveAnswer(new Answer("поменять профессию", question));
-        answerService.saveAnswer(new Answer("обратиться к родственникам за помощью", question));
-        answerService.saveAnswer(new Answer("повысить свой образовательный уровень (получить второе образование)", question));
-        answerService.saveAnswer(new Answer("ввести ЛПХ (растеневодство или животноводство для продажи продукции)", question));
-        answerService.saveAnswer(new Answer("найти нерегулярные заработки, подработку", question));
-        answerService.saveAnswer(new Answer("продать неиспользуемое имущество", question));
-        answerService.saveAnswer(new Answer("открыть собственное дело", question));
-        answerService.saveAnswer(new Answer("экономить на развлечениях и отдыхе", question));
-        answerService.saveAnswer(new Answer("сдавать в аренду имущество", question));
-        answerService.saveAnswer(new Answer("экономить на покупке одежды и обуви", question));
-        answerService.saveAnswer(new Answer("обраться в государственные органы или органы местного самоуправления за материальной помощью", question));
-        answerService.saveAnswer(new Answer("экономить на питании", question));
-        answerService.saveAnswer(new Answer("взять кредит, ссуду, заем", question));
-
-        question = questionService.questionSave(new Question("Как Вы оцениваете значение личного подсобного хозяйства для бюджета Вашей семьи?", "radioType"));
-        answerService.saveAnswer(new Answer("не имеем ЛПХ: по состоянию здоровья не сможем обрабатывать, далеко добираться, нет возможности купить, нет желания заниматься землей", question));
-        answerService.saveAnswer(new Answer("это основной источник питания для нашей семьи", question));
-        answerService.saveAnswer(new Answer("дополнительный источник питания и денежных доходов от продажи продукции", question));
-        answerService.saveAnswer(new Answer("никакого значения не имеет", question));
-
-        question = questionService.questionSave(new Question("При наличии ЛПХ - укажите сферу деятельности:", "radioType"));
-        answerService.saveAnswer(new Answer("растениеводство", question));
-        answerService.saveAnswer(new Answer("животноводство", question));
-        answerService.saveAnswer(new Answer("смешанное хозяйство", question));
-
-        question = questionService.questionSave(new Question("Имеются ли у Вашей семьи сельскохозяйственные животные, укажите количество:", "textType"));
-        answerService.saveAnswer(new Answer("КРС", question));
-        answerService.saveAnswer(new Answer("МРС", question));
-        answerService.saveAnswer(new Answer("лошади", question));
-        answerService.saveAnswer(new Answer("свиньи", question));
-        answerService.saveAnswer(new Answer("куры", question));
-
-        question = questionService.questionSave(new Question("Где проживает Ваша семья?", "radioType"));
-        answerService.saveAnswer(new Answer("отдельная благоустроенная квартира (многоквартирный дом)", question));
-        answerService.saveAnswer(new Answer("неблагоустроенная квартира (с частичными удобствами)", question));
-        answerService.saveAnswer(new Answer("индивидуальный построенный дом", question));
-        answerService.saveAnswer(new Answer("дом с частичными удобствами", question));
-        answerService.saveAnswer(new Answer("съемное жилье", question));
-        answerService.saveAnswer(new Answer("жилплощадь в общежитии", question));
-        answerService.saveAnswer(new Answer("часть квартиры (дома), где живут родственники", question));
-
-        question = questionService.questionSave(new Question("Есть ли перед Вашей семьей остро стоит жилищный вопрос, как Вы его решаете?", "checkType"));
-        answerService.saveAnswer(new Answer("такой вопрос не стоит", question));
-        answerService.saveAnswer(new Answer("занимаетесь обменом, куплей-продажей", question));
-        answerService.saveAnswer(new Answer("собираетесь приобрести еще 1 жилье", question));
-        answerService.saveAnswer(new Answer("делаете пристройку, перепланировку", question));
-        answerService.saveAnswer(new Answer("стоите в очереди", question));
-        answerService.saveAnswer(new Answer("переедете туда, где есть более дешевое жилье", question));
-        answerService.saveAnswer(new Answer("рассчитываете получить наследство", question));
-        answerService.saveAnswer(new Answer("никак не решаете из-за отсутствия денег", question));
-        answerService.saveAnswer(new Answer("получение кредита (ипотеки)", question));
-
-        question = questionService.questionSave(new Question("Имеет ли Ваша семья (кто-нибудь из членов Вашей семьи) еще одно жилье:", "checkType"));
-        answerService.saveAnswer(new Answer("отдельная квартира", question));
-        answerService.saveAnswer(new Answer("индивидуальный дом", question));
-        answerService.saveAnswer(new Answer("комната (несколько комнат) в общежитии (квартире)", question));
-        answerService.saveAnswer(new Answer("дача/коллективный огород", question));
-        answerService.saveAnswer(new Answer("гараж стационарный/бокс", question));
-        answerService.saveAnswer(new Answer("земельный участок", question));
-
-        question = questionService.questionSave(new Question("Имеются ли в распоряжении Вашей семьи транспортные средства, укажите их количество:", "textType"));
-        answerService.saveAnswer(new Answer("ничего не имеем", question));
-        answerService.saveAnswer(new Answer("легковой автомобиль", question));
-        answerService.saveAnswer(new Answer("автобус/ микроавтобус", question));
-        answerService.saveAnswer(new Answer("грузовой автомобиль", question));
-        answerService.saveAnswer(new Answer("спецтехника", question));
+        question = questionService.questionSave(new Question("Укажите основной вид деятельности членов Вашей семьи (для находящихся в отпуске по беременности и родам или по уходу за ребенком – вид деятельности до отпуска)", "radioType"));
+        answerService.saveAnswer(new Answer("официально работает на предприятии, в организации в Республике Тыва", question));
+        answerService.saveAnswer(new Answer("официально работает за пределами республики", question));
+        answerService.saveAnswer(new Answer("работает без официального трудоустройства на предприятии, организации", question));
+        answerService.saveAnswer(new Answer("нет постоянной работы, но есть случайные нерегулярные заработки", question));
+        answerService.saveAnswer(new Answer("индивидуальный предприниматель", question));
+        answerService.saveAnswer(new Answer("всегда занималась (занимался) только домом, никогда не работал и не ищу работу", question));
+        answerService.saveAnswer(new Answer("раньше работала, сейчас не работаю, ищу работу", question));
+        answerService.saveAnswer(new Answer("работал(а), но сейчас не работаю и не собираюсь в ближайшее время", question));
+        answerService.saveAnswer(new Answer("занимаюсь только личным подсобным или приусадебным хозяйством", question));
+        answerService.saveAnswer(new Answer("неработающий, состоит на учете в ЦЗН", question));
+        answerService.saveAnswer(new Answer("временно или длительно нетрудоспособный (инвалидность)", question));
+        answerService.saveAnswer(new Answer("осуществляет уход за престарелым/инвалидом/ребенком-инвалидом", question));
+        answerService.saveAnswer(new Answer("до отпуска", question));
 
         question = questionService.questionSave(new Question("В какой отрасли работают члены вашей семьи?", "radioType"));
         answerService.saveAnswer(new Answer("промышленность", question));
@@ -421,6 +308,7 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("культура, искусство", question));
         answerService.saveAnswer(new Answer("государственная (муниципальная) служба", question));
         answerService.saveAnswer(new Answer("силовые структуры", question));
+        answerService.saveAnswer(new Answer("военные структуры", question));
         answerService.saveAnswer(new Answer("образование, наука", question));
         answerService.saveAnswer(new Answer("сельское хозяйство", question));
         answerService.saveAnswer(new Answer("финансы,кредит, страхование", question));
@@ -430,18 +318,249 @@ public class DatabaseController {
 
         question = questionService.questionSave(new Question("К какой группе работников относятся члены Вашей семьи?", "radioType"));
         answerService.saveAnswer(new Answer("руководитель", question));
-        answerService.saveAnswer(new Answer("начальник", question));
-        answerService.saveAnswer(new Answer("специалист", question));
-        answerService.saveAnswer(new Answer("служащий технического и обслуживающего персонала (повар, няня, разнорабочий и т.п.", question));
+        answerService.saveAnswer(new Answer("высоко квалифицированный специалист (должность предполагает высшее образование)", question));
+        answerService.saveAnswer(new Answer("служащий из числа технического и обслуживающего персонала (повар, няня и т.п.)", question));
         answerService.saveAnswer(new Answer("военнослужащий", question));
+        answerService.saveAnswer(new Answer("квалифицированный рабочий", question));
+        answerService.saveAnswer(new Answer("неквалифицированный рабочий (разнорабочий, техничка и т.п.)", question));
 
-        question = questionService.questionSave(new Question("Что предпринимали члены вашей семьи  для поиска работы?", "checkType"));
+        question = questionService.questionSave(new Question("Имеют ли подработку, приносящую дополнительный заработок, члены Вашей семьи?", "checkType"));
+        answerService.saveAnswer(new Answer("присмотр и уход (за больными детьми; за больными достигшими возраста 80 лет; за иными лицами, нуждающимися в постоянном постороннем уходе по заключению медицинской организации)", question));
+        answerService.saveAnswer(new Answer("репетиторство", question));
+        answerService.saveAnswer(new Answer("уборка жилых помещений, ведение домашнего хозяйства", question));
+        answerService.saveAnswer(new Answer("по выпасу скота", question));
+        answerService.saveAnswer(new Answer("по стрижке овец", question));
+        answerService.saveAnswer(new Answer("по пошиву и ремонту одежды", question));
+        answerService.saveAnswer(new Answer("по текущему ремонту жилых помещений", question));
+        answerService.saveAnswer(new Answer("по изготовлению фотографий", question));
+        answerService.saveAnswer(new Answer("по организации и проведению обрядов (свадеб, юбилеев), в т.ч. по музыкальному сопровождению", question));
+        answerService.saveAnswer(new Answer("по организации и проведению экскурсий гидами и экскурсоводами", question));
+        answerService.saveAnswer(new Answer("тренеров и инструкторов по фитнесу и бодифитнесу", question));
+        answerService.saveAnswer(new Answer("от предоставления собственных услуг (от стрижки и укладки волос, от наращивания ресниц и оформлению бровей, фото-видео услуги и т.п.)", question));
+        answerService.saveAnswer(new Answer("пропустить", question));
+
+        question = questionService.questionSave(new Question("Что предпринимали члены вашей семьи для поиска работы?", "checkType"));
         answerService.saveAnswer(new Answer("работу не искал(а)", question));
         answerService.saveAnswer(new Answer("обращался(ась) к друзьям, родным, знакомым", question));
         answerService.saveAnswer(new Answer("встал(а) на учет в службу занятости", question));
         answerService.saveAnswer(new Answer("обращался(ась) непосредственно на предприятие, к работодателю", question));
         answerService.saveAnswer(new Answer("пытался(ась) организовать собственное дело", question));
         answerService.saveAnswer(new Answer("слежу за информацией о вакансиях по объявлениям  в газете, по радио, в интернете", question));
+
+        question = questionService.questionSave(new Question("Зарегистрированы ли безработные члены вашей семьи в службе занятости?", "radioType"));
+        answerService.saveAnswer(new Answer("да, имею официальный статус безработного", question));
+        answerService.saveAnswer(new Answer("да, состою на учете, но без статуса безработного", question));
+        answerService.saveAnswer(new Answer("нет, но собираюсь обратиться в службу занятости", question));
+        answerService.saveAnswer(new Answer("не вижу необходимости в регистрации", question));
+
+        question = questionService.questionSave(new Question("Какое требование к работе является важным для членов Вашей семьи", "checkType"));
+        answerService.saveAnswer(new Answer("подходящий заработок", question));
+        answerService.saveAnswer(new Answer("соответствие профессии, специальности", question));
+        answerService.saveAnswer(new Answer("удобный режим работы", question));
+        answerService.saveAnswer(new Answer("содержательная работа с нормальными условиями труда", question));
+        answerService.saveAnswer(new Answer("близость к дому", question));
+        answerService.saveAnswer(new Answer("перспективы профессионального и должностного роста", question));
+        answerService.saveAnswer(new Answer("устроит любая работа", question));
+
+        question = questionService.questionSave(new Question("Перечислите ежемесячные постоянные доходы Вашей семьи:", "checkType"));
+        answerService.saveAnswer(new Answer("заработная плата в денежной форме", question));
+        answerService.saveAnswer(new Answer("доход от предпринимательской деятельности", question));
+        answerService.saveAnswer(new Answer("доход от сдачи собственности в аренду", question));
+        answerService.saveAnswer(new Answer("пенсия всех видов", question));
+        answerService.saveAnswer(new Answer("пособие по безработице", question));
+        answerService.saveAnswer(new Answer("алименты", question));
+        answerService.saveAnswer(new Answer("стипендии", question));
+        answerService.saveAnswer(new Answer("пособия на детей", question));
+        answerService.saveAnswer(new Answer("другие денежные субсидии (ЖКХ), компенсации(род. плата)", question));
+
+        question = questionService.questionSave(new Question("Перечислите периодические доходы Вашей семьи:", "checkType"));
+        answerService.saveAnswer(new Answer("доходы от продажи продуктов с ЛПХ, собранных грибов, ягод, продуктов охоты, рыболовства", question));
+        answerService.saveAnswer(new Answer("страховые возмещения (пособия по временной нетрудоспособности)", question));
+        answerService.saveAnswer(new Answer("деньги, подарки, вещи от родственников, других частных лиц", question));
+        answerService.saveAnswer(new Answer("помощь благотворительных фондов", question));
+        answerService.saveAnswer(new Answer("выигрыши в лотореи и прочие игры", question));
+        answerService.saveAnswer(new Answer("доходы от предоставления собственных услуг (от стрижки и укладки волос, от наращивания ресниц и оформлению бровей, от проведения свадеб, фото-видео услуги и т.п.)", question));
+        answerService.saveAnswer(new Answer("пропустить", question));
+
+        questionService.questionSave(new Question("Сколько составляет общий доход  ВСЕХ членов Вашей семьи в месяц (в рублях)?", "textType"));
+
+        question = questionService.questionSave(new Question("Перечислите основные ежемесячные расходы Вашей семьи (основные траты):", "textType"));
+        answerService.saveAnswer(new Answer("питание", question));
+        answerService.saveAnswer(new Answer("оплата жилья и коммунальных услуг", question));
+        answerService.saveAnswer(new Answer("оплата за сад, обучение, секции", question));
+        answerService.saveAnswer(new Answer("приобретение одежды, обуви", question));
+        answerService.saveAnswer(new Answer("приобретение лекарств, оплата лечения, анализов", question));
+        answerService.saveAnswer(new Answer("оплата долгов 3-м лицам", question));
+        answerService.saveAnswer(new Answer("содержание личного транспорта", question));
+        answerService.saveAnswer(new Answer("оплата кредита, займа, ссуды", question));
+        answerService.saveAnswer(new Answer("развлечения: театр, кино, прогулки и пр.", question));
+        answerService.saveAnswer(new Answer("ведения ЛПХ (приобретение удобрений, кормов, с/х инвентаря, семян и пр.", question));
+
+        questionService.questionSave(new Question("Общий расход ВСЕХ членов Вашей семьи в месяц (в рублях)?", "textType"));
+
+        question = questionService.questionSave(new Question("Какое из перечисленных описаний точнее всего соответствует материальному положению Вашей семьи:", "radioType"));
+        answerService.saveAnswer(new Answer("денег не хватает даже на питание", question));
+        answerService.saveAnswer(new Answer("денег хватает только на питание", question));
+        answerService.saveAnswer(new Answer("на питание и одежду денег хватает, но более крупные покупки приходится откладывать на потом", question));
+        answerService.saveAnswer(new Answer("денег вполне хватает на покупку крупной бытовой техники, но мы не можем купить автомашину, дач", question));
+        answerService.saveAnswer(new Answer("денег хватает на все, кроме таких дорогих приобретений, как квартира, дом", question));
+        answerService.saveAnswer(new Answer("мы можем позволить себе купить машину, дачу, словом ни в чем себе не отказываем", question));
+
+        question = questionService.questionSave(new Question("Какова причина того, что Ваша семья имеет низкие доходы", "checkType"));
+        answerService.saveAnswer(new Answer("низкий уровень оплаты труда", question));
+        answerService.saveAnswer(new Answer("отсутствие работы (подработки) по месту жительства", question));
+        answerService.saveAnswer(new Answer("ухаживаю за больным членом семьи", question));
+        answerService.saveAnswer(new Answer("много несовершеннолетних в семье", question));
+        answerService.saveAnswer(new Answer("не хочу работать за низкую зарплату", question));
+        answerService.saveAnswer(new Answer("низкая квалификация (отсутствие среднего специального или высшего образования)", question));
+        answerService.saveAnswer(new Answer("не позволяет работать состояние здоровья", question));
+        answerService.saveAnswer(new Answer("высокие цены на продукты питания и вещи", question));
+        answerService.saveAnswer(new Answer("отсутствие точек сбыта для реализации продукции с ЛПХ", question));
+        answerService.saveAnswer(new Answer("невысокий размер социальных выплат и пособий", question));
+        answerService.saveAnswer(new Answer("бездействие органов местного самоуправления", question));
+
+        question = questionService.questionSave(new Question("Откладывают ли сбережения в вашей семье?", "radioType"));
+        answerService.saveAnswer(new Answer("да, ежемесячно", question));
+        answerService.saveAnswer(new Answer("от случая к случаю", question));
+        answerService.saveAnswer(new Answer("нет, не хватает денег даже на текущие расходы", question));
+        answerService.saveAnswer(new Answer("приходится брать деньги в долг (постоянно, изредка)", question));
+
+        question = questionService.questionSave(new Question("Приходилось ли Вам брать деньги в долг, если да, то почему?", "checkType"));
+        answerService.saveAnswer(new Answer("на самые необходимые расходы: еда, оплата жилья и коммунальных услуг, лекарства", question));
+        answerService.saveAnswer(new Answer("на экстренный ремонт жилья (транспортного средства)", question));
+        answerService.saveAnswer(new Answer("на ремонт и покупку (замену) телевизора, холодильника, простой мебели", question));
+        answerService.saveAnswer(new Answer("приобретение самых необходимых лекарств и медикаментов, оплату экстренной медпомощи", question));
+        answerService.saveAnswer(new Answer("на оплату кредитов, займов", question));
+        answerService.saveAnswer(new Answer("не одалживаю денег ни у кого", question));
+
+        question = questionService.questionSave(new Question("Какая примерно часть общего суммарного бюджета семьи ежемесячно уходит на питание", "radioType"));
+        answerService.saveAnswer(new Answer("менее половины", question));
+        answerService.saveAnswer(new Answer("примерно половина", question));
+        answerService.saveAnswer(new Answer("примерно две трети", question));
+        answerService.saveAnswer(new Answer("почти все", question));
+
+        question = questionService.questionSave(new Question("Отметьте, на что способна Ваша семья", "checkType"));
+        answerService.saveAnswer(new Answer("на отложенные деньги поехать в отпуск за пределы республики раз в год", question));
+        answerService.saveAnswer(new Answer("своевременно погасить задолженности (по ипотеке, кредитам, коммунальным платежам", question));
+        answerService.saveAnswer(new Answer("позволить себе компьютер и доступ к Интернету", question));
+        answerService.saveAnswer(new Answer("за свой счет регулярно (1 раза в месяц) участвовать в мероприятиях досуга и отдыха", question));
+        answerService.saveAnswer(new Answer("купить новую одежду", question));
+        answerService.saveAnswer(new Answer("сходить в кафе/ ресторан 1 раз в неделю/1 раз в месяц", question));
+        answerService.saveAnswer(new Answer("тратить деньги в пределах 1000 руб. на собственные нужды каждую неделю", question));
+        answerService.saveAnswer(new Answer("пропустить", question));
+
+        question = questionService.questionSave(new Question("Предполагаете ли Вы улучшить существующее материальное положение?", "radioType"));
+        answerService.saveAnswer(new Answer("да", question));
+        answerService.saveAnswer(new Answer("нет", question));
+
+        question = questionService.questionSave(new Question("Что из ниже перечисленного Вы предпринимаете для того, чтобы изменить материальное благосостояние самого себя и своей семьи?", "checkType"));
+        answerService.saveAnswer(new Answer("поменять место работы", question));
+        answerService.saveAnswer(new Answer("найти дополнительную подработку", question));
+        answerService.saveAnswer(new Answer("открыть собственное дело/предпринимательство", question));
+        answerService.saveAnswer(new Answer("получить от органов власти поддержку (участие в губернаторских проектах, получение субсидирования в виде денег)", question));
+        answerService.saveAnswer(new Answer("переквалифицировался (ась) на мастера по массажу, макияжу и маникюра", question));
+        answerService.saveAnswer(new Answer("пройти повышение квалификации", question));
+        answerService.saveAnswer(new Answer("заняться скотоводством, рыболовством и собирательством", question));
+        answerService.saveAnswer(new Answer("переехать в другой район, либо город", question));
+
+        question = questionService.questionSave(new Question("Каким видом промысла занимается Ваша семья?", "checkType"));
+        answerService.saveAnswer(new Answer("собирательство (ягоды, грибы, шишки и т.д)", question));
+        answerService.saveAnswer(new Answer("охотничий промысел", question));
+        answerService.saveAnswer(new Answer("рыболовство", question));
+        answerService.saveAnswer(new Answer("не занимаемся промыслом", question));
+
+        question = questionService.questionSave(new Question("Как Вы оцениваете роль промысла для Вашей семьи?", "checkType"));
+        answerService.saveAnswer(new Answer("основной источник питания для нашей семьи", question));
+        answerService.saveAnswer(new Answer("дополнительный источник питания и денежных доходов от продажи продукции", question));
+
+        question = questionService.questionSave(new Question("Как вы оцениваете значение личного подсобного хозяйства для бюджета Вашей семьи?", "radioType"));
+        answerService.saveAnswer(new Answer("основной источник питания для нашей семьи", question));
+        answerService.saveAnswer(new Answer("дополнительный источник питания и денежных доходов от продажи продукции", question));
+        answerService.saveAnswer(new Answer("не имеем ЛПХ", question));
+        answerService.saveAnswer(new Answer("никакого значения не имеет", question));
+
+        question = questionService.questionSave(new Question("При наличии ЛПХ - укажите сферу деятельности:", "checkType"));
+        answerService.saveAnswer(new Answer("растениеводство", question));
+        answerService.saveAnswer(new Answer("животноводство", question));
+        answerService.saveAnswer(new Answer("смешанное хозяйство", question));
+
+        question = questionService.questionSave(new Question("Ваша семья держит ли сельскохозяйственных животных?", "textType"));
+        answerService.saveAnswer(new Answer("КРС", question));
+        answerService.saveAnswer(new Answer("МРС", question));
+        answerService.saveAnswer(new Answer("лошади", question));
+        answerService.saveAnswer(new Answer("свиньи", question));
+        answerService.saveAnswer(new Answer("куры/гуси", question));
+        answerService.saveAnswer(new Answer("яки", question));
+        answerService.saveAnswer(new Answer("верблюды", question));
+        answerService.saveAnswer(new Answer("олени", question));
+        answerService.saveAnswer(new Answer("не держит", question));
+
+        question = questionService.questionSave(new Question("Укажите, пожалуйста, с кем и в каких жилищных условиях живете?", "radioType"));
+        answerService.saveAnswer(new Answer("собственный частный дом", question));
+        answerService.saveAnswer(new Answer("приватизированная квартира", question));
+        answerService.saveAnswer(new Answer("живем с родителями, родственниками", question));
+        answerService.saveAnswer(new Answer("снимаем комнату в коммунальной квартире, времянку", question));
+        answerService.saveAnswer(new Answer("снимаем квартиру, дом", question));
+        answerService.saveAnswer(new Answer("живем в общежитии", question));
+        answerService.saveAnswer(new Answer("ипотечное жилье", question));
+
+        question = questionService.questionSave(new Question("Есть ли перед Вашей семьей остро стоит жилищный вопрос, как Вы его решаете?", "checkType"));
+        answerService.saveAnswer(new Answer("коплю на покупку/стройку собственного жилья", question));
+        answerService.saveAnswer(new Answer("буду оформлять кредит на благоустройство имеющегося квартиры/дома/дачи, так как нет возможности копить на новое жильё", question));
+        answerService.saveAnswer(new Answer("стою в очереди, чтобы получить дом/квартиру", question));
+        answerService.saveAnswer(new Answer("оформляю ипотеку/кредит, чтобы улучшить жилищные условия", question));
+        answerService.saveAnswer(new Answer("рассчитываю получить наследство", question));
+        answerService.saveAnswer(new Answer("никак не решаю из-за финансовых возможностей", question));
+        answerService.saveAnswer(new Answer("не имею проблем с жильем", question));
+
+        question = questionService.questionSave(new Question("Имеет ли Ваша семья (кто-нибудь из членов Вашей семьи) еще одно недвижимое имущество:", "checkType"));
+        answerService.saveAnswer(new Answer("отдельная квартира", question));
+        answerService.saveAnswer(new Answer("индивидуальный дом", question));
+        answerService.saveAnswer(new Answer("комната (несколько комнат) в общежитии (квартире)", question));
+        answerService.saveAnswer(new Answer("дача/коллективный огород", question));
+        answerService.saveAnswer(new Answer("гараж стационарный/бокс", question));
+        answerService.saveAnswer(new Answer("земельный участок", question));
+        answerService.saveAnswer(new Answer("пропустить", question));
+
+        question = questionService.questionSave(new Question("Какие предметы длительного пользования и в каком количестве имеются в Вашей семье:", "textType"));
+        answerService.saveAnswer(new Answer("холодильник", question));
+        answerService.saveAnswer(new Answer("плита (газовая, электрическая)", question));
+        answerService.saveAnswer(new Answer("духовой шкаф", question));
+        answerService.saveAnswer(new Answer("посудомоечная машина", question));
+        answerService.saveAnswer(new Answer("стиральная машина", question));
+        answerService.saveAnswer(new Answer("швейная машинка", question));
+        answerService.saveAnswer(new Answer("электроутюг", question));
+        answerService.saveAnswer(new Answer("пылесос", question));
+        answerService.saveAnswer(new Answer("кондиционер", question));
+        answerService.saveAnswer(new Answer("телевизор", question));
+        answerService.saveAnswer(new Answer("компьютер/ноутбук", question));
+        answerService.saveAnswer(new Answer("ноутбук и пр", question));
+        answerService.saveAnswer(new Answer("домашний кинотеатр", question));
+        answerService.saveAnswer(new Answer("фотоаппарат", question));
+        answerService.saveAnswer(new Answer("стационарный телефон", question));
+        answerService.saveAnswer(new Answer("кнопочный телефон", question));
+        answerService.saveAnswer(new Answer("Смартфон", question));
+        answerService.saveAnswer(new Answer("iPhone", question));
+
+        question = questionService.questionSave(new Question("Сколько каналов Вы смотрите?", "radioType"));
+        answerService.saveAnswer(new Answer("1-5 каналов", question));
+        answerService.saveAnswer(new Answer("6-10 каналов", question));
+        answerService.saveAnswer(new Answer("11-15 каналов", question));
+        answerService.saveAnswer(new Answer("16-20 каналов", question));
+        answerService.saveAnswer(new Answer("более 20 каналов", question));
+        answerService.saveAnswer(new Answer("нет телевизора", question));
+
+        question = questionService.questionSave(new Question("Имеются ли в распоряжении Вашей семьи транспортные средства, укажите их количество:", "textType"));
+        answerService.saveAnswer(new Answer("легковой автомобиль", question));
+        answerService.saveAnswer(new Answer("автобус/ микроавтобус", question));
+        answerService.saveAnswer(new Answer("грузовой автомобиль", question));
+        answerService.saveAnswer(new Answer("моторная лодка/катер", question));
+        answerService.saveAnswer(new Answer("снегоход/мотоцикл/мопед", question));
+        answerService.saveAnswer(new Answer("не имеем транспортные средства", question));
+
+        question = questionService.questionSave(new Question("Если имеется, укажите год выпуска транспортных средств:", "radioType"));
+        answerService.saveAnswer(new Answer("до 2000 г/в.", question));
+        answerService.saveAnswer(new Answer("2000 г/в. и выше", question));
 
         question = questionService.questionSave(new Question("Как Вы оцените здоровье членов Вашей семьи?", "radioType"));
         answerService.saveAnswer(new Answer("в основном здоровы", question));
@@ -450,11 +569,23 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("болеют редко", question));
         answerService.saveAnswer(new Answer("имеются больные с хроническими заболеваниями", question));
 
+        question = questionService.questionSave(new Question("Где лечатся члены Вашей семьи", "radioType"));
+        answerService.saveAnswer(new Answer("в поликлинике/ФАП по месту жительства", question));
+        answerService.saveAnswer(new Answer("в платной клинике", question));
+        answerService.saveAnswer(new Answer("не обращаюсь в больницу", question));
+        answerService.saveAnswer(new Answer("не хватает денег оплатить дорогу в больницу", question));
+
         question = questionService.questionSave(new Question("За последний год обращался ли кто-либо из членов Вашей семьи за медпомощью к платным врачам?", "radioType"));
         answerService.saveAnswer(new Answer("не было необходимости", question));
         answerService.saveAnswer(new Answer("да, так как нет бесплатных врачей такого профиля", question));
         answerService.saveAnswer(new Answer("к бесплатному невозможно попасть", question));
         answerService.saveAnswer(new Answer("не устроил прием бесплатного врача", question));
+
+        question = questionService.questionSave(new Question("Если в течение года кто-либо из членов Вашей семьи обращался к врачу, было ли выполнено назначенное лечение (анализы, исследования, препараты и пр.)?", "radioType"));
+        answerService.saveAnswer(new Answer("да, выполнили", question));
+        answerService.saveAnswer(new Answer("выполнили частично, так как не хватило денег", question));
+        answerService.saveAnswer(new Answer("приобрели дешевые аналоги выписанных лекарств", question));
+        answerService.saveAnswer(new Answer("вообще не выполнили, нет денег", question));
 
         question = questionService.questionSave(new Question("Если в семье есть хронические больные/инвалиды, то обеспечиваются ли они необходимыми  лекарствами?", "radioType"));
         answerService.saveAnswer(new Answer("да, полностью, регулярно", question));
@@ -462,22 +593,18 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("нет, на это нет денег", question));
         answerService.saveAnswer(new Answer("хронических больных нет", question));
 
-        question = questionService.questionSave(new Question("Получает ли кто-либо из членов Вашей семьи какие-либо меры соц. поддержки?", "checkType"));
-        answerService.saveAnswer(new Answer("Одно село - один продукт", question));
-        answerService.saveAnswer(new Answer("Кыштаг для молодой семьи", question));
-        answerService.saveAnswer(new Answer("Корова-кормилица", question));
-        answerService.saveAnswer(new Answer("Социальный уголь", question));
-        answerService.saveAnswer(new Answer("Социальный картофель", question));
-        answerService.saveAnswer(new Answer("В каждой семье не менее одного ребенка с высшим образованием", question));
 
         question = questionService.questionSave(new Question("Получала ли Ваша семья (кто-либо из членов Вашей семьи) помощь от отдельно живущих родителей, родственников, соседей, незнакомых людей (организация)?", "checkType"));
         answerService.saveAnswer(new Answer("регулярно деньгами", question));
         answerService.saveAnswer(new Answer("регулярно продуктами, вещами", question));
         answerService.saveAnswer(new Answer("помогли в получении (погашеннии) кредита/ипотеки", question));
-        answerService.saveAnswer(new Answer("единовременно (при покупке жилья/техники/ оплата ", question));
+        answerService.saveAnswer(new Answer("единовременно (при покупке жилья/техники/машины/оплата отдыха, лечения, учебы)", question));
         answerService.saveAnswer(new Answer("оказали помошь в трудоустройстве", question));
-        answerService.saveAnswer(new Answer("материальной помошь не получали", question));
+        answerService.saveAnswer(new Answer("время от времени деньгами/продуктами/вещами", question));
+        answerService.saveAnswer(new Answer("помогают при стирке/уборке/починке одежды", question));
         answerService.saveAnswer(new Answer("помогают растить ребенка/ухаживать за членом семьи", question));
+        answerService.saveAnswer(new Answer("оказывают профконсультации, иные услуги (медицинские, юридические и др.)", question));
+        answerService.saveAnswer(new Answer("материальной помошь не получали", question));
 
         question = questionService.questionSave(new Question("Если получали, какую роль играет эта помощь в бюджете Вашей семьи?", "radioType"));
         answerService.saveAnswer(new Answer("без этого не смогли бы прожить", question));
@@ -485,10 +612,13 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("незначительно", question));
         answerService.saveAnswer(new Answer("никакой роли, просто традиция", question));
 
+        question = questionService.questionSave(new Question("Оказывала ли Ваша семья помощь отдельно живущим родителям, родственникам, соседям", "radioType"));
+        answerService.saveAnswer(new Answer("да", question));
+        answerService.saveAnswer(new Answer("нет", question));
+
         question = questionService.questionSave(new Question("Случались ли в Вашей семье за последний год непредвиденные радостные (рождение ребенка и пр.) или печальные (похороны, операция и др.) события?", "radioType"));
-        answerService.saveAnswer(new Answer("радостные", question));
-        answerService.saveAnswer(new Answer("печальные", question));
-        answerService.saveAnswer(new Answer("событий не было", question));
+        answerService.saveAnswer(new Answer("да", question));
+        answerService.saveAnswer(new Answer("нет", question));
 
         question = questionService.questionSave(new Question("Укажите источники средств, которые Вы использовали на вышеуказанные события:", "checkType"));
         answerService.saveAnswer(new Answer("обошлись собственными силами", question));
@@ -498,12 +628,16 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("взяли в долг", question));
 
         question = questionService.questionSave(new Question("Как Вы считаете, что можно изменить в Вашем населенном пункте, чтобы преодолеть бедность вообще или повысить материальный достаток Вашей семьи?", "checkType"));
-        answerService.saveAnswer(new Answer("рабочие места", question));
-        answerService.saveAnswer(new Answer("строительство новых предприятий (школы, садиков и т.п.)", question));
-        answerService.saveAnswer(new Answer("изменение критериев социальных проектов (возраст, состав семьи и т.п.)", question));
-        answerService.saveAnswer(new Answer("регулирование цен на продукты", question));
+        answerService.saveAnswer(new Answer("создание новых (дополнительных) рабочих мест", question));
+        answerService.saveAnswer(new Answer("повышение уровня заработной платы", question));
+        answerService.saveAnswer(new Answer("строительство новых учреждений (школы, садиков и т.п.) и предприятий", question));
+        answerService.saveAnswer(new Answer("изменение критериев социальных проектов (возраст, количества членов семьи и т.п.)", question));
+        answerService.saveAnswer(new Answer("регулирование цен на продукты, бензин, уголь", question));
         answerService.saveAnswer(new Answer("реконструкция/строительство дорог(мостов)", question));
-        answerService.saveAnswer(new Answer("заниматься животноводством/растениеводством", question));
-        answerService.saveAnswer(new Answer("доступные кредитные ресурсы", question));
+        answerService.saveAnswer(new Answer("строительство ж/д дороги", question));
+        answerService.saveAnswer(new Answer("занятие животноводством/растениеводством", question));
+
+        return "ok";
     }
+
 }

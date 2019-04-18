@@ -21,14 +21,14 @@ public class QuestionnaireNumController {
     public String listQuestionnaireNums(Model model) {
         List <QuestionnaireNum> questionnaireNums = questionnaireNumService.getAllQuestionnaireNums();
         model.addAttribute("questionnaireNums", questionnaireNums);
-        return "list-questionnaireNums";
+        return "list_questionnaire_numbs";
     }
 
     @GetMapping("/showForm")
     public String showFormForAdd(Model model) {
         QuestionnaireNum questionnaireNum = new QuestionnaireNum();
         model.addAttribute("questionnaireNum", questionnaireNum);
-        return "questionnaireNum-form";
+        return "questionnaire_numbs-form";
     }
 
     @PostMapping("/saveQuestionnaireNum")
@@ -42,7 +42,7 @@ public class QuestionnaireNumController {
                                     Model model) throws ResourceNotFoundException {
         QuestionnaireNum questionnaireNum = questionnaireNumService.getQuestionnaireNumById(id);
         model.addAttribute("questionnaireNum", questionnaireNum);
-        return "questionnaireNum-form";
+        return "questionnaire_numbs-form";
     }
 
     @GetMapping("/delete")

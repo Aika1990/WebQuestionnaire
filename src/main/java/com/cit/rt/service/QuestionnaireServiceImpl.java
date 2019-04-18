@@ -31,7 +31,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService{
     @Override
     @Transactional
     public void saveQuestionnaire(Questionnaire questionnaire) {
-        questionnaireRepository.save(questionnaire);
+        questionnaireRepository.saveAndFlush(questionnaire);
     }
 
     @Override

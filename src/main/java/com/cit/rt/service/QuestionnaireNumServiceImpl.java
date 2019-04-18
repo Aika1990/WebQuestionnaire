@@ -1,5 +1,6 @@
 package com.cit.rt.service;
 
+import com.cit.rt.entity.AppSettings;
 import com.cit.rt.entity.QuestionnaireNum;
 import com.cit.rt.exception.ResourceNotFoundException;
 import com.cit.rt.repository.QuestionnaireNumRepository;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,7 +32,7 @@ public class QuestionnaireNumServiceImpl implements QuestionnaireNumService {
     @Override
     @Transactional
     public QuestionnaireNum saveQuestionnaireNum(QuestionnaireNum questionnaireNum) {
-        questionnaireNumRepository.save(questionnaireNum);
+        questionnaireNumRepository.saveAndFlush(questionnaireNum);
         return questionnaireNum;
     }
 
@@ -43,5 +45,15 @@ public class QuestionnaireNumServiceImpl implements QuestionnaireNumService {
     @Override
     public void deleteAllQuestionnaireNum() {
         questionnaireNumRepository.deleteAll();
+    }
+
+    @Override
+    public List<QuestionnaireNum> getQnaireByAppSettings(Integer appSettingsId) {
+        return questionnaireNumRepository.getQnaireByAppSettings(appSettingsId);
+    }
+
+    @Override
+    public QuestionnaireNum getQuestionnaireNumByAppAndDate(Integer appSettingsId, String date) {
+        return questionnaireNumRepository.getQuestionnaireNumByAppAndDate(appSettingsId, date);
     }
 }

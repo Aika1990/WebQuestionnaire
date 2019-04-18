@@ -67,9 +67,9 @@ public class WebMvcConfig  implements WebMvcConfigurer {
 //        // Define all possible view resolvers
 //        List<ViewResolver> resolvers = new ArrayList<>();
 //
-//        resolvers.add(csvViewResolver());
+//        //resolvers.add(csvViewResolver());
 //        resolvers.add(excelViewResolver());
-//        resolvers.add(pdfViewResolver());
+//        //resolvers.add(pdfViewResolver());
 //
 //        resolver.setViewResolvers(resolvers);
 //        return resolver;
@@ -83,7 +83,7 @@ public class WebMvcConfig  implements WebMvcConfigurer {
 //    public ViewResolver excelViewResolver() {
 //        return new ExcelViewResolver();
 //    }
-//
+
 //    /*
 //     * Configure View resolver to provide Csv output using Super Csv library to
 //     * generate Csv output for an object content

@@ -6,11 +6,14 @@ import com.cit.rt.controller.dto.QuestionnaireNumDTO;
 import com.cit.rt.entity.AppSettings;
 import com.cit.rt.entity.Questionnaire;
 import com.cit.rt.entity.QuestionnaireNum;
+import com.cit.rt.entity.Settlement;
 import com.cit.rt.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -44,7 +47,7 @@ class AndroidUploadController {
             appSettings.setLastName("Кожомбаева");
             appSettings.setFirstName("Айнура");
             appSettings.setPhone("89232775457");
-            appSettings.setSettlement(settlementService.getSettlementById(2).getId());
+            appSettings.setSettlementId(54);
             return appSettings;
 
         }catch (Exception e) {
@@ -64,14 +67,15 @@ class AndroidUploadController {
     @RequestMapping(value = "android/appSettings/save", method = RequestMethod.POST, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE}, headers = "Accept=application/json")
     @ResponseBody
     public AppSettingsDTO save(@RequestBody AppSettingsDTO appSettingsDTO) {
+        String name = appSettingsDTO.firstName;
         try {
-            AppSettings appSettings = appSettingsService.findByDetailsAppsettings(appSettingsDTO.lastName, appSettingsDTO.firstName, appSettingsDTO.phone);
+            AppSettings appSettings = appSettingsService.findByDetailsAppsettings(appSettingsDTO.lastName, appSettingsDTO.firstName, appSettingsDTO.phone, appSettingsDTO.settlementId);
             if(appSettings != null) {
                 AppSettingsDTO settingsDTO = new AppSettingsDTO();
                 settingsDTO.setId(appSettings.getId());
                 return settingsDTO;
             } else {
-                appSettings = appSettingsService.saveAppSetting(new AppSettings(settlementService.getSettlementById(appSettingsDTO.getSettlement()),
+                appSettings = appSettingsService.saveAppSetting(new AppSettings(settlementService.getSettlementById(appSettingsDTO.settlementId),
                         appSettingsDTO.getLastName(), appSettingsDTO.getFirstName(), appSettingsDTO.getPhone()));
                 AppSettingsDTO settingsDTO = new AppSettingsDTO();
                 settingsDTO.setId(appSettings.getId());
@@ -86,8 +90,14 @@ class AndroidUploadController {
     @ResponseBody
     public QuestionnaireNumDTO save(@RequestBody QuestionnaireNumDTO questionnaireNumDTO) {
         try {
-            QuestionnaireNum questionnaireNum = questionnaireNumService.saveQuestionnaireNum(new QuestionnaireNum(appSettingsService.getAppSettingsById(questionnaireNumDTO.appSettingsId)));
-            return new QuestionnaireNumDTO(questionnaireNum.getId(), questionnaireNum.getAppSettings().getId());
+            QuestionnaireNum questionnaireNum = questionnaireNumService.getQuestionnaireNumByAppAndDate(questionnaireNumDTO.appSettingsId, questionnaireNumDTO.createDate);
+            if (questionnaireNum != null) {
+                return new QuestionnaireNumDTO(1, 1, String.valueOf(System.currentTimeMillis()));
+            } else {
+                questionnaireNum = questionnaireNumService.saveQuestionnaireNum(new QuestionnaireNum(appSettingsService.getAppSettingsById(questionnaireNumDTO.appSettingsId), questionnaireNumDTO.createDate));
+                return new QuestionnaireNumDTO(questionnaireNum.getId(), questionnaireNum.getAppSettings().getId(), questionnaireNum.getCreateDate());
+            }
+
         }catch (Exception e) {
             System.out.print(e.getMessage());
             return null;

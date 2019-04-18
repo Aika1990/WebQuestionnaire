@@ -5,55 +5,67 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-
-public class AppSettingsDTO implements Serializable {
+public class WorkerDTO implements Serializable {
 
     @SerializedName("id")
     @Expose
     public Integer id;
-    @SerializedName("settlementId")
-    @Expose
-    public Integer settlementId;
+
     @SerializedName("lastName")
     @Expose
     public String lastName;
+
     @SerializedName("firstName")
     @Expose
     public String firstName;
+
     @SerializedName("phone")
     @Expose
     public String phone;
 
-    public AppSettingsDTO() {
+    @SerializedName("count")
+    @Expose
+    public Integer count;
+
+    @SerializedName("settlement")
+    @Expose
+    public String settlement;
+
+    public String getSettlement() {
+        return settlement;
     }
 
-    public AppSettingsDTO(Integer id, Integer settlementId, String lastName, String firstName, String phone) {
+    public void setSettlement(String settlement) {
+        this.settlement = settlement;
+    }
+
+    public WorkerDTO() {
+    }
+
+    public WorkerDTO(Integer id, String lastName, String firstName, String phone, Integer count) {
         this.id = id;
-        this.settlementId = settlementId;
         this.lastName = lastName;
         this.firstName = firstName;
         this.phone = phone;
+        this.count = count;
     }
 
-    //@XmlElement(name = "id")
     public Integer getId() {
         return id;
     }
-
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public Integer getSettlementId() {
-        return settlementId;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setSettlementId(Integer settlementId) {
-        this.settlementId = settlementId;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
-    //@XmlElement(name = "lastName")
     public String getLastName() {
         return lastName;
     }
@@ -62,7 +74,6 @@ public class AppSettingsDTO implements Serializable {
         this.lastName = lastName;
     }
 
-   // @XmlElement(name = "firstName")
     public String getFirstName() {
         return firstName;
     }
@@ -71,7 +82,6 @@ public class AppSettingsDTO implements Serializable {
         this.firstName = firstName;
     }
 
-    //@XmlElement(name = "phone")
     public String getPhone() {
         return phone;
     }

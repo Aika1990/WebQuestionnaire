@@ -49,7 +49,7 @@ public class AppSettings implements Serializable {
         this.id = id;
     }
 
-    public Settlement getSettlement(Settlement settlementById) {
+    public Settlement getSettlement() {
         return settlement;
     }
 
@@ -80,15 +80,4 @@ public class AppSettings implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-//    @Override
-//    public String toString() {
-//        return "AppSettings{" +
-//                "id=" + id +
-//                ", settlement=" + settlement +
-//                ", lastName='" + lastName + '\'' +
-//                ", firstName='" + firstName + '\'' +
-//                ", phone='" + phone + '\'' +
-//                '}';
-//    }
 }

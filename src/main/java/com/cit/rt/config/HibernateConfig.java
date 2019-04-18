@@ -62,8 +62,8 @@ public class HibernateConfig {
         hibernateProperties.setProperty("hibernate.cache.use_query_cache", env.getProperty("hibernate.cache.use_query_cache")); //
         hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         hibernateProperties.setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
-//        hibernateProperties.setProperty("hibernate.default_schema", env.getProperty("hibernate.default_schema"));
-//        hibernateProperties.setProperty("hibernate.default_catalog", env.getProperty("hibernate.default_catalog"));
+        hibernateProperties.setProperty("hibernate.temp.use_jdbc_metadata_defaults", env.getProperty("hibernate.temp.use_jdbc_metadata_defaults"));
+//        hibernateProperties.setProperty("hibernate.default_catalog", env.getProperty("hibernate.default_catalog"));hibernate.temp.use_jdbc_metadata_defaults
         return hibernateProperties;
     }
 

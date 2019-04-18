@@ -19,37 +19,37 @@ public class ExcelView extends AbstractXlsView {
                                       HttpServletResponse response) throws Exception {
 
         // change the file name
-        response.setHeader("Content-Disposition", "attachment; filename=\"my-xls-file.xls\"");
-
-        @SuppressWarnings("unchecked")
-        List<District> districts = (List<District>) model.get("districts");
-        Sheet sheet = workbook.createSheet("District Detail");
-        sheet.setDefaultColumnWidth(30);
-
-        // create style for header cells
-        CellStyle style = workbook.createCellStyle();
-        Font font = workbook.createFont();
-        font.setFontName("Arial");
-        style.setFillForegroundColor(HSSFColor.BLUE.index);
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        font.setBold(true);
-        font.setColor(HSSFColor.WHITE.index);
-        style.setFont(font);
-
-
-        // create header row
-        Row header = sheet.createRow(0);
-        header.createCell(0).setCellValue("id");
-        header.getCell(0).setCellStyle(style);
-        header.createCell(1).setCellValue("name");
-        header.getCell(1).setCellStyle(style);
-
-        int rowCount = 1;
-
-        for(District district : districts) {
-            Row districtRow = sheet.createRow(rowCount++);
-            districtRow.createCell(0).setCellValue(district.getId());
-            districtRow.createCell(1).setCellValue(district.getName());
-        }
+//        response.setHeader("Content-Disposition", "attachment; filename=\"questionnaire-file.xls\"");
+//
+//        @SuppressWarnings("unchecked")
+//        List<District> districts = (List<District>) model.get("districts");
+//        Sheet sheet = workbook.createSheet("District Detail");
+//        sheet.setDefaultColumnWidth(20);
+//
+//        // create style for header cells
+//        CellStyle style = workbook.createCellStyle();
+//        Font font = workbook.createFont();
+//        font.setFontName("Arial");
+//        style.setFillForegroundColor(HSSFColor.BLUE.index);
+//        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+//        font.setBold(true);
+//        font.setColor(HSSFColor.WHITE.index);
+//        style.setFont(font);
+//
+//
+//        // create header row
+//        Row header = sheet.createRow(0);
+//        header.createCell(0).setCellValue("id");
+//        header.getCell(0).setCellStyle(style);
+//        header.createCell(1).setCellValue("name");
+//        header.getCell(1).setCellStyle(style);
+//
+//        int rowCount = 1;
+//
+//        for(District district : districts) {
+//            Row districtRow = sheet.createRow(rowCount++);
+//            districtRow.createCell(0).setCellValue(district.getId());
+//            districtRow.createCell(1).setCellValue(district.getName());
+//        }
     }
 }

@@ -1,6 +1,8 @@
 package com.cit.rt.service;
 
 import com.cit.rt.entity.AppSettings;
+import com.cit.rt.entity.District;
+import com.cit.rt.entity.Settlement;
 import com.cit.rt.exception.ResourceNotFoundException;
 import com.cit.rt.repository.AppSettingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,12 @@ public class AppSettingsServiceImpl implements AppSettingsService {
 
     @Autowired
     private AppSettingsRepository appSettingsRepository;
+
+    @Autowired
+    DistrictService districtService;
+
+    @Autowired
+    SettlementService settlementService;
 
     @Override
     @Transactional
@@ -30,7 +38,7 @@ public class AppSettingsServiceImpl implements AppSettingsService {
     @Override
     @Transactional
     public void saveAppSettings(AppSettings appSettings) {
-        appSettingsRepository.save(appSettings);
+        appSettingsRepository.saveAndFlush(appSettings);
     }
 
     @Override
@@ -50,7 +58,13 @@ public class AppSettingsServiceImpl implements AppSettingsService {
     }
 
     @Override
-    public AppSettings findByDetailsAppsettings(String lastName, String firstName, String phone) {
-        return appSettingsRepository.findByDetailsAppsettings(lastName, firstName, phone);
+    public AppSettings findByDetailsAppsettings(String lastName, String firstName, String phone, Integer settlement) {
+        return appSettingsRepository.findByDetailsAppsettings(lastName, firstName, phone, settlement);
     }
+
+    @Override
+    public List<AppSettings> getAppSettingsBySettlement(Settlement settlement) {
+        return appSettingsRepository.getAppSettingsBySettlement(settlement);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.cit.rt.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "questionnaire_numb")
@@ -14,11 +15,15 @@ public class QuestionnaireNum implements Serializable {
     @JoinColumn(name = "app_settings_id", nullable = false)
     private AppSettings appSettings;
 
+    @Column(name = "create_date")
+    private String createDate;
+
     public QuestionnaireNum() {
     }
 
-    public QuestionnaireNum(AppSettings appSettings) {
+    public QuestionnaireNum(AppSettings appSettings, String createDate) {
         this.appSettings = appSettings;
+        this.createDate = createDate;
     }
 
     public Integer getId() {
@@ -35,6 +40,14 @@ public class QuestionnaireNum implements Serializable {
 
     public void setAppSettings(AppSettings appSettings) {
         this.appSettings = appSettings;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 
     @Override

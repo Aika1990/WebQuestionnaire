@@ -33,7 +33,7 @@ public class AppSettingsController {
     public String listAppSettings(Model model) {
         List <AppSettings> appSettings = appSettingsService.getAllAppSettings();
         model.addAttribute("appSettings", appSettings);
-        return "list-appSettings";
+        return "list-app_settings";
     }
 
     @GetMapping("/showForm")

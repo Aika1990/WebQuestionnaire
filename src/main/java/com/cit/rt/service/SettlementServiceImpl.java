@@ -2,6 +2,7 @@ package com.cit.rt.service;
 
 import com.cit.rt.entity.Settlement;
 import com.cit.rt.exception.ResourceNotFoundException;
+import com.cit.rt.repository.DistrictRepository;
 import com.cit.rt.repository.SettlementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ public class SettlementServiceImpl implements SettlementService {
 
     @Autowired
     SettlementRepository settlementRepository;
+
+    @Autowired
+    DistrictRepository districtRepository;
 
     @Override
     @Transactional
@@ -42,5 +46,10 @@ public class SettlementServiceImpl implements SettlementService {
     @Transactional
     public void deleteSettlementById(Integer id) {
         settlementRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Settlement> getSettlementByDistrictId(Integer districtId) {
+        return settlementRepository.getSettlementByDistrictId(districtRepository.getOne(districtId));
     }
 }

@@ -12,4 +12,5 @@ public interface SettlementService {
     void saveSettlement(Settlement settlement);
     Settlement settlementSave(Settlement settlement);
     void deleteSettlementById(Integer id) throws ResourceNotFoundException;
+    List<Settlement> getSettlementByDistrictId(Integer districtId) throws ResourceNotFoundException;
 }

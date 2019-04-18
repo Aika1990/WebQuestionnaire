@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-@Component
 @Entity
 @Table (name = "district")
 public class District {
