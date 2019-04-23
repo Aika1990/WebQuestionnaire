@@ -67,7 +67,6 @@ class AndroidUploadController {
     @RequestMapping(value = "android/appSettings/save", method = RequestMethod.POST, produces = {MimeTypeUtils.APPLICATION_JSON_VALUE}, headers = "Accept=application/json")
     @ResponseBody
     public AppSettingsDTO save(@RequestBody AppSettingsDTO appSettingsDTO) {
-        String name = appSettingsDTO.firstName;
         try {
             AppSettings appSettings = appSettingsService.findByDetailsAppsettings(appSettingsDTO.lastName, appSettingsDTO.firstName, appSettingsDTO.phone, appSettingsDTO.settlementId);
             if(appSettings != null) {

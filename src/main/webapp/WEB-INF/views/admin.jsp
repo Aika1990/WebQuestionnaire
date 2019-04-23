@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions"
@@ -16,7 +16,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a href="#" class="navbar-brand">
+    <a href="http://localhost:8080" class="navbar-brand">
         <img src="/resources/img/lightbox/logo.png" width="30" height="30" alt="logo">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -32,7 +32,10 @@
                 <a href="/admin/workers" class="nav-link">Сотрудники</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">Опросы</a>
+                <a href="/admin/questionnaire" class="nav-link">Опросы</a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/questions" class="nav-link">Вопросы</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -69,6 +72,9 @@
             </div>
         </div>
         <div class="col col-lg-10">
+            <b>Всего поселений: ${countSettlement}</b><br>
+            <b>Всего работников, принявших участие опроснике: ${countWorkers} </b><br>
+            <b>Всего опросов: ${countQnaireNum}</b>
             <div class="panel-group" id="accordion">
                 <c:forEach var="workersSettlementDTO" items="${workersSettlementDTOList}">
                     <div class="panel panel-default">

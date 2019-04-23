@@ -1,6 +1,7 @@
 package com.cit.rt.service;
 
 import com.cit.rt.entity.Answer;
+import com.cit.rt.entity.Question;
 import com.cit.rt.exception.ResourceNotFoundException;
 import com.cit.rt.repository.AnswerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,10 @@ public class AnswerServiceImpl implements AnswerService{
     @Transactional
     public void deleteAnswerById(Integer id) {
         answerRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Answer> getAnswersByQuestion(Question question) {
+        return answerRepository.getAnswersByQuestion(question);
     }
 }

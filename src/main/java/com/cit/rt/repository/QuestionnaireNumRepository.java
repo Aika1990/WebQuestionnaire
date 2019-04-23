@@ -19,4 +19,5 @@ public interface QuestionnaireNumRepository extends JpaRepository<QuestionnaireN
 
     @Query("SELECT qnaireNum FROM QuestionnaireNum qnaireNum join qnaireNum.appSettings app WHERE app.id = :app_settings_id AND qnaireNum.createDate = :create_date")
     QuestionnaireNum getQuestionnaireNumByAppAndDate(@Param("app_settings_id") Integer app_settings_id, @Param("create_date")  String create_date);
+
 }

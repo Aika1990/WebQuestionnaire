@@ -1,14 +1,16 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Export</title>
+    <title>Админская часть</title>
 </head>
 <body>
-<h3>Download Excel Customers File</h3>
+<h3>Страница для админа</h3>
 <div>
-    <a href="http://localhost:8080/export/download/districts.xlsx">Districts .XLSX</a>
+    <a href="/database/save">Загрузить данные в чистую базу</a>
     <hr>
-    <a href="/database/save">Загрузить данные в базу</a>
+    <a href="/admin">Админ</a>
+    <hr>
+    <a href="http://localhost:8080/export/download/districts.xlsx">Districts .XLSX</a>
 </div>
 </body>
 </html>

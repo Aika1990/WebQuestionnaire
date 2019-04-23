@@ -362,7 +362,7 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("перспективы профессионального и должностного роста", question));
         answerService.saveAnswer(new Answer("устроит любая работа", question));
 
-        question = questionService.questionSave(new Question("Перечислите ежемесячные постоянные доходы Вашей семьи:", "checkType"));
+        question = questionService.questionSave(new Question("Перечислите ежемесячные постоянные доходы Вашей семьи:", "textType"));
         answerService.saveAnswer(new Answer("заработная плата в денежной форме", question));
         answerService.saveAnswer(new Answer("доход от предпринимательской деятельности", question));
         answerService.saveAnswer(new Answer("доход от сдачи собственности в аренду", question));
@@ -373,7 +373,7 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("пособия на детей", question));
         answerService.saveAnswer(new Answer("другие денежные субсидии (ЖКХ), компенсации(род. плата)", question));
 
-        question = questionService.questionSave(new Question("Перечислите периодические доходы Вашей семьи:", "checkType"));
+        question = questionService.questionSave(new Question("Перечислите периодические доходы Вашей семьи:", "textType"));
         answerService.saveAnswer(new Answer("доходы от продажи продуктов с ЛПХ, собранных грибов, ягод, продуктов охоты, рыболовства", question));
         answerService.saveAnswer(new Answer("страховые возмещения (пособия по временной нетрудоспособности)", question));
         answerService.saveAnswer(new Answer("деньги, подарки, вещи от родственников, других частных лиц", question));
@@ -469,7 +469,7 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("рыболовство", question));
         answerService.saveAnswer(new Answer("не занимаемся промыслом", question));
 
-        question = questionService.questionSave(new Question("Как Вы оцениваете роль промысла для Вашей семьи?", "checkType"));
+        question = questionService.questionSave(new Question("Как Вы оцениваете роль промысла для Вашей семьи?", "radioType"));
         answerService.saveAnswer(new Answer("основной источник питания для нашей семьи", question));
         answerService.saveAnswer(new Answer("дополнительный источник питания и денежных доходов от продажи продукции", question));
 
@@ -479,7 +479,7 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("не имеем ЛПХ", question));
         answerService.saveAnswer(new Answer("никакого значения не имеет", question));
 
-        question = questionService.questionSave(new Question("При наличии ЛПХ - укажите сферу деятельности:", "checkType"));
+        question = questionService.questionSave(new Question("При наличии ЛПХ - укажите сферу деятельности:", "radioType"));
         answerService.saveAnswer(new Answer("растениеводство", question));
         answerService.saveAnswer(new Answer("животноводство", question));
         answerService.saveAnswer(new Answer("смешанное хозяйство", question));
@@ -637,7 +637,7 @@ public class DatabaseController {
         answerService.saveAnswer(new Answer("строительство ж/д дороги", question));
         answerService.saveAnswer(new Answer("занятие животноводством/растениеводством", question));
 
-        return "ok";
+        return "admin";
     }
 
 }
