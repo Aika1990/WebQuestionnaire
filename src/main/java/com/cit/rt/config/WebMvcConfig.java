@@ -1,8 +1,5 @@
 package com.cit.rt.config;
 
-import com.cit.rt.viewResolver.CsvViewResolver;
-import com.cit.rt.viewResolver.ExcelViewResolver;
-import com.cit.rt.viewResolver.PdfViewResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

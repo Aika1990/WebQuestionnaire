@@ -10,7 +10,10 @@
     <hr>
     <a href="/admin">Админ</a>
     <hr>
-    <a href="http://localhost:8080/export/download/districts.xlsx">Districts .XLSX</a>
+    <a href="/export/questionnaireAll">Выгрузить всеобщий результат опроса в .XLSX</a>
+    <hr>
+    <a href="/export/questionnaireSettlement">Выгрузить результат опроса в .XLSX по районам</a>
+    <hr>
 </div>
 </body>
 </html>
